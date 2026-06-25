@@ -139,6 +139,22 @@
         "name": "assets/PeashooterG.png",
         "smoothed": true,
         "userAdded": false
+      },
+      {
+        "file": "assets/SunFlower_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/SunFlower_1.png",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/Peashooter_1.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/Peashooter_1.png",
+        "smoothed": true,
+        "userAdded": false
       }
     ]
   },
@@ -153,7 +169,9 @@
       "effects": [],
       "behaviors": [],
       "content": {
-        "Price": 50
+        "Price": 50,
+        "PreviewObjectName": "SunflowerCardPreview",
+        "PreviewGroupName": "CardPreviewGroup"
       }
     },
     {
@@ -166,7 +184,57 @@
       "effects": [],
       "behaviors": [],
       "content": {
-        "Price": 100
+        "Price": 100,
+        "PreviewObjectName": "PeaShooterCardPreview",
+        "PreviewGroupName": "CardPreviewGroup"
+      }
+    },
+    {
+      "assetStoreId": "",
+      "name": "SunflowerCardPreview",
+      "type": "pvz::CardPreview",
+      "variant": "Sunflower",
+      "variables": [
+        {
+          "name": "Layer",
+          "type": "string",
+          "value": "UI"
+        }
+      ],
+      "effects": [],
+      "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "FollowMouseCursor",
+          "type": "utils::FollowMouseCursor"
+        }
+      ],
+      "content": {
+        "Layer": "UI"
+      }
+    },
+    {
+      "assetStoreId": "",
+      "name": "PeaShooterCardPreview",
+      "type": "pvz::CardPreview",
+      "variant": "PeaShooter",
+      "variables": [
+        {
+          "name": "Layer",
+          "type": "string",
+          "value": "UI"
+        }
+      ],
+      "effects": [],
+      "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "FollowMouseCursor",
+          "type": "utils::FollowMouseCursor"
+        }
+      ],
+      "content": {
+        "Layer": "UI"
       }
     }
   ],
@@ -178,6 +246,12 @@
       },
       {
         "objectName": "PeaShooterCardSlot"
+      },
+      {
+        "objectName": "SunflowerCardPreview"
+      },
+      {
+        "objectName": "PeaShooterCardPreview"
       }
     ]
   },
@@ -190,6 +264,17 @@
         },
         {
           "name": "PeaShooterCardSlot"
+        }
+      ]
+    },
+    {
+      "name": "CardPreviewGroup",
+      "objects": [
+        {
+          "name": "PeaShooterCardPreview"
+        },
+        {
+          "name": "SunflowerCardPreview"
         }
       ]
     }
@@ -218,7 +303,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.7171164872656575,
+        "zoomFactor": 0.5500032386579707,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -374,49 +459,48 @@
                 "includeConfig": 0
               },
               "target": "Main_DrawGroundSlots"
+            },
+            {
+              "type": "BuiltinCommonInstructions::Link",
+              "include": {
+                "includeConfig": 0
+              },
+              "target": "Main_HandleSpawnRequests"
             }
           ],
           "parameters": []
         },
         {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [
+          "type": "BuiltinCommonInstructions::ForEach",
+          "object": "GroundSlot",
+          "conditions": [],
+          "actions": [],
+          "events": [
             {
-              "type": {
-                "value": "IsCursorOnObject"
-              },
-              "parameters": [
-                "GroundSlot",
-                "",
-                "",
-                ""
-              ]
-            },
-            {
-              "type": {
-                "value": "MouseButtonFromTextPressed"
-              },
-              "parameters": [
-                "",
-                "\"Left\""
-              ]
-            },
-            {
-              "type": {
-                "value": "BuiltinCommonInstructions::Once"
-              },
-              "parameters": []
-            }
-          ],
-          "actions": [
-            {
-              "type": {
-                "value": "DebuggerTools::ConsoleLog"
-              },
-              "parameters": [
-                "\"clicked: index = \"+ ToString(GroundSlot.Index())+\", row=\"+ToString(GroundSlot.Row())+\", column=\"+ToString(GroundSlot.Column())",
-                "\"info\"",
-                ""
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "utils::IsMouseClick"
+                  },
+                  "parameters": [
+                    "",
+                    "GroundSlot",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"clicked: index = \"+ ToString(GroundSlot.Index())+\", row=\"+ToString(GroundSlot.Row())+\", column=\"+ToString(GroundSlot.Column())",
+                    "\"info\"",
+                    ""
+                  ]
+                }
               ]
             }
           ]
@@ -541,6 +625,60 @@
               }
             }
           ]
+        },
+        {
+          "ambientLightColorB": 200,
+          "ambientLightColorG": 200,
+          "ambientLightColorR": 200,
+          "camera2DPlaneMaxDrawingDistance": 5000,
+          "camera3DFarPlaneDistance": 10000,
+          "camera3DFieldOfView": 45,
+          "camera3DNearPlaneDistance": 3,
+          "cameraType": "",
+          "followBaseLayerCamera": false,
+          "isLightingLayer": false,
+          "isLocked": false,
+          "name": "UI",
+          "renderingType": "",
+          "visibility": true,
+          "cameras": [],
+          "effects": [
+            {
+              "effectType": "Scene3D::HemisphereLight",
+              "name": "3D Ambient Hemisphere Light",
+              "doubleParameters": {
+                "elevation": 40,
+                "intensity": 0.33,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "groundColor": "127;127;127",
+                "skyColor": "255;255;255",
+                "top": "Z+"
+              },
+              "booleanParameters": {}
+            },
+            {
+              "effectType": "Scene3D::DirectionalLight",
+              "name": "3D Sun Light",
+              "doubleParameters": {
+                "distanceFromCamera": 1500,
+                "elevation": 40,
+                "frustumSize": 4000,
+                "intensity": 0.75,
+                "minimumShadowBias": 0,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "color": "255;255;255",
+                "shadowQuality": "medium",
+                "top": "Z+"
+              },
+              "booleanParameters": {
+                "isCastingShadow": true
+              }
+            }
+          ]
         }
       ],
       "behaviorsSharedData": [
@@ -555,6 +693,10 @@
         {
           "name": "Flippable",
           "type": "FlippableCapability::FlippableBehavior"
+        },
+        {
+          "name": "FollowMouseCursor",
+          "type": "utils::FollowMouseCursor"
         },
         {
           "name": "Opacity",
@@ -675,7 +817,7 @@
                         "GroundSlot",
                         "StartX+Column*Width",
                         "StartY+Row*Height",
-                        ""
+                        "\"Ground\""
                       ]
                     },
                     {
@@ -831,6 +973,124 @@
           "actions": []
         }
       ]
+    },
+    {
+      "associatedLayout": "Main",
+      "name": "Main_HandleSpawnRequests",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "Spawner::HasSpawnRequest"
+              },
+              "parameters": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "JSONToVariableStructure2"
+              },
+              "parameters": [
+                "Spawner::PollSpawnRequest()",
+                "Data"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "ToJSON(Data)",
+                    "",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "StringVariable"
+                  },
+                  "parameters": [
+                    "Data.GroupName",
+                    "=",
+                    "\"CardPreviewGroup\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "CreateByName"
+                  },
+                  "parameters": [
+                    "",
+                    "CardPreviewGroup",
+                    "Data.ObjName",
+                    "Data.PosX",
+                    "Data.PosY",
+                    "CardPreviewGroup.Layer"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "CardPreviewGroup.Layer",
+                    "",
+                    ""
+                  ]
+                }
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "folded": true,
+              "name": "Data",
+              "type": "structure",
+              "children": [
+                {
+                  "name": "GroupName",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "ObjName",
+                  "type": "string",
+                  "value": ""
+                },
+                {
+                  "name": "PosX",
+                  "type": "number",
+                  "value": 0
+                },
+                {
+                  "name": "PosY",
+                  "type": "number",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "eventsFunctionsExtensions": [
@@ -853,87 +1113,9 @@
       "dependencies": [],
       "globalVariables": [],
       "sceneVariables": [],
-      "eventsFunctions": [
-        {
-          "fullName": "",
-          "functionType": "Condition",
-          "name": "IsMouseClick",
-          "sentence": "Is Click on _PARAM1_",
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "IsCursorOnObject"
-                  },
-                  "parameters": [
-                    "Object",
-                    "",
-                    "",
-                    ""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "MouseButtonFromTextPressed"
-                  },
-                  "parameters": [
-                    "",
-                    "\"Left\""
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "BuiltinCommonInstructions::Once"
-                  },
-                  "parameters": []
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SetReturnBoolean"
-                  },
-                  "parameters": [
-                    "True"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Else",
-              "conditions": [],
-              "actions": [
-                {
-                  "type": {
-                    "value": "SetReturnBoolean"
-                  },
-                  "parameters": [
-                    "False"
-                  ]
-                }
-              ]
-            }
-          ],
-          "parameters": [
-            {
-              "description": "",
-              "name": "Object",
-              "supplementaryInformation": "pvz::CardSlot",
-              "type": "objectList"
-            }
-          ],
-          "objectGroups": []
-        }
-      ],
+      "eventsFunctions": [],
       "eventsFunctionsFolderStructure": {
-        "folderName": "__ROOT",
-        "children": [
-          {
-            "functionName": "IsMouseClick"
-          }
-        ]
+        "folderName": "__ROOT"
       },
       "eventsBasedBehaviors": [],
       "eventsBasedObjects": [
@@ -1818,7 +2000,7 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "pvz::IsMouseClick"
+                        "value": "utils::IsMouseClick"
                       },
                       "parameters": [
                         "",
@@ -1835,6 +2017,30 @@
                       "parameters": [
                         "Object.ObjectName()",
                         "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "Sprite",
+                        "Animation",
+                        "=",
+                        "\"Disabled\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Spawner::PushSpawnRequest"
+                      },
+                      "parameters": [
+                        "",
+                        "PreviewObjectName",
+                        "CursorX()",
+                        "CursorY()",
+                        "PreviewGroupName",
                         ""
                       ]
                     }
@@ -1869,11 +2075,29 @@
               "type": "Number",
               "label": "",
               "name": "Price"
+            },
+            {
+              "value": "",
+              "type": "String",
+              "label": "",
+              "name": "PreviewObjectName"
+            },
+            {
+              "value": "",
+              "type": "String",
+              "label": "",
+              "name": "PreviewGroupName"
             }
           ],
           "propertiesFolderStructure": {
             "folderName": "__ROOT",
             "children": [
+              {
+                "propertyName": "PreviewObjectName"
+              },
+              {
+                "propertyName": "PreviewGroupName"
+              },
               {
                 "propertyName": "Price"
               }
@@ -2352,7 +2576,422 @@
                 "gridColor": 10401023,
                 "gridAlpha": 0.8,
                 "snap": false,
-                "zoomFactor": 2.675527197226908,
+                "zoomFactor": 2.8590087544078573,
+                "windowMask": false,
+                "selectedLayer": "",
+                "gameEditorMode": "instances-editor"
+              }
+            }
+          ]
+        },
+        {
+          "areaMaxX": 64,
+          "areaMaxY": 64,
+          "areaMaxZ": 64,
+          "areaMinX": 0,
+          "areaMinY": 0,
+          "areaMinZ": 0,
+          "defaultName": "",
+          "description": "",
+          "fullName": "CardPreview",
+          "helpPath": "",
+          "iconUrl": "",
+          "isUsingLegacyInstancesRenderer": false,
+          "name": "CardPreview",
+          "previewIconUrl": "",
+          "objects": [
+            {
+              "adaptCollisionMaskAutomatically": true,
+              "assetStoreId": "",
+              "name": "NewSprite",
+              "persistentUuid": "9e1afa86-48cc-480f-a674-f7c19974cfe8",
+              "type": "Sprite",
+              "updateIfNotVisible": false,
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "animations": []
+            }
+          ],
+          "objectsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "objectName": "NewSprite"
+              }
+            ]
+          },
+          "objectsGroups": [],
+          "layers": [
+            {
+              "ambientLightColorB": 200,
+              "ambientLightColorG": 200,
+              "ambientLightColorR": 200,
+              "camera2DPlaneMaxDrawingDistance": 5000,
+              "camera3DFarPlaneDistance": 10000,
+              "camera3DFieldOfView": 45,
+              "camera3DNearPlaneDistance": 3,
+              "cameraType": "",
+              "followBaseLayerCamera": false,
+              "isLightingLayer": false,
+              "isLocked": false,
+              "name": "",
+              "renderingType": "",
+              "visibility": true,
+              "cameras": [
+                {
+                  "defaultSize": true,
+                  "defaultViewport": true,
+                  "height": 0,
+                  "viewportBottom": 1,
+                  "viewportLeft": 0,
+                  "viewportRight": 1,
+                  "viewportTop": 0,
+                  "width": 0
+                }
+              ],
+              "effects": []
+            }
+          ],
+          "instances": [
+            {
+              "angle": 0,
+              "customSize": false,
+              "height": 0,
+              "keepRatio": true,
+              "layer": "",
+              "name": "NewSprite",
+              "persistentUuid": "48e26fad-b174-497e-b1d5-7daa701ec9ba",
+              "width": 0,
+              "x": 0,
+              "y": 0,
+              "zOrder": 1,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
+            }
+          ],
+          "editionSettings": {
+            "grid": false,
+            "gridType": "rectangular",
+            "gridWidth": 32,
+            "gridHeight": 32,
+            "gridDepth": 32,
+            "gridOffsetX": 0,
+            "gridOffsetY": 0,
+            "gridOffsetZ": 0,
+            "gridColor": 10401023,
+            "gridAlpha": 0.8,
+            "snap": false,
+            "zoomFactor": 1.3095508913925902,
+            "windowMask": false,
+            "selectedLayer": "",
+            "gameEditorMode": "instances-editor"
+          },
+          "behaviors": [
+            {
+              "name": "FollowMouseCursor",
+              "type": "utils::FollowMouseCursor"
+            }
+          ],
+          "eventsFunctions": [],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT"
+          },
+          "propertyDescriptors": [],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          },
+          "variants": [
+            {
+              "areaMaxX": 73,
+              "areaMaxY": 74,
+              "areaMaxZ": 64,
+              "areaMinX": 0,
+              "areaMinY": 0,
+              "areaMinZ": 0,
+              "name": "Sunflower",
+              "objects": [
+                {
+                  "adaptCollisionMaskAutomatically": true,
+                  "assetStoreId": "",
+                  "name": "NewSprite",
+                  "persistentUuid": "9e1afa86-48cc-480f-a674-f7c19974cfe8",
+                  "type": "Sprite",
+                  "updateIfNotVisible": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "animations": [
+                    {
+                      "name": "",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/SunFlower_1.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 36.5,
+                                "y": 37
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": [
+                                [
+                                  {
+                                    "x": 3,
+                                    "y": 2
+                                  },
+                                  {
+                                    "x": 66,
+                                    "y": 2
+                                  },
+                                  {
+                                    "x": 66,
+                                    "y": 74
+                                  },
+                                  {
+                                    "x": 3,
+                                    "y": 74
+                                  }
+                                ]
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "objectsFolderStructure": {
+                "folderName": "__ROOT",
+                "children": [
+                  {
+                    "objectName": "NewSprite"
+                  }
+                ]
+              },
+              "objectsGroups": [],
+              "layers": [
+                {
+                  "ambientLightColorB": 200,
+                  "ambientLightColorG": 200,
+                  "ambientLightColorR": 200,
+                  "camera2DPlaneMaxDrawingDistance": 5000,
+                  "camera3DFarPlaneDistance": 10000,
+                  "camera3DFieldOfView": 45,
+                  "camera3DNearPlaneDistance": 3,
+                  "cameraType": "",
+                  "followBaseLayerCamera": false,
+                  "isLightingLayer": false,
+                  "isLocked": false,
+                  "name": "",
+                  "renderingType": "",
+                  "visibility": true,
+                  "cameras": [
+                    {
+                      "defaultSize": true,
+                      "defaultViewport": true,
+                      "height": 0,
+                      "viewportBottom": 1,
+                      "viewportLeft": 0,
+                      "viewportRight": 1,
+                      "viewportTop": 0,
+                      "width": 0
+                    }
+                  ],
+                  "effects": []
+                }
+              ],
+              "instances": [
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "NewSprite",
+                  "persistentUuid": "48e26fad-b174-497e-b1d5-7daa701ec9ba",
+                  "width": 0,
+                  "x": 0,
+                  "y": 0,
+                  "zOrder": 1,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                }
+              ],
+              "editionSettings": {
+                "grid": false,
+                "gridType": "rectangular",
+                "gridWidth": 32,
+                "gridHeight": 32,
+                "gridDepth": 32,
+                "gridOffsetX": 0,
+                "gridOffsetY": 0,
+                "gridOffsetZ": 0,
+                "gridColor": 10401023,
+                "gridAlpha": 0.8,
+                "snap": false,
+                "zoomFactor": 1.3537093797072197,
+                "windowMask": false,
+                "selectedLayer": "",
+                "gameEditorMode": "instances-editor"
+              }
+            },
+            {
+              "areaMaxX": 71,
+              "areaMaxY": 71,
+              "areaMaxZ": 64,
+              "areaMinX": 0,
+              "areaMinY": 0,
+              "areaMinZ": 0,
+              "name": "PeaShooter",
+              "objects": [
+                {
+                  "adaptCollisionMaskAutomatically": true,
+                  "assetStoreId": "",
+                  "name": "NewSprite",
+                  "persistentUuid": "9e1afa86-48cc-480f-a674-f7c19974cfe8",
+                  "type": "Sprite",
+                  "updateIfNotVisible": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "animations": [
+                    {
+                      "name": "",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/Peashooter_1.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": [
+                                [
+                                  {
+                                    "x": 3,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 66,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 66,
+                                    "y": 70
+                                  },
+                                  {
+                                    "x": 3,
+                                    "y": 70
+                                  }
+                                ]
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "objectsFolderStructure": {
+                "folderName": "__ROOT",
+                "children": [
+                  {
+                    "objectName": "NewSprite"
+                  }
+                ]
+              },
+              "objectsGroups": [],
+              "layers": [
+                {
+                  "ambientLightColorB": 200,
+                  "ambientLightColorG": 200,
+                  "ambientLightColorR": 200,
+                  "camera2DPlaneMaxDrawingDistance": 5000,
+                  "camera3DFarPlaneDistance": 10000,
+                  "camera3DFieldOfView": 45,
+                  "camera3DNearPlaneDistance": 3,
+                  "cameraType": "",
+                  "followBaseLayerCamera": false,
+                  "isLightingLayer": false,
+                  "isLocked": false,
+                  "name": "",
+                  "renderingType": "",
+                  "visibility": true,
+                  "cameras": [
+                    {
+                      "defaultSize": true,
+                      "defaultViewport": true,
+                      "height": 0,
+                      "viewportBottom": 1,
+                      "viewportLeft": 0,
+                      "viewportRight": 1,
+                      "viewportTop": 0,
+                      "width": 0
+                    }
+                  ],
+                  "effects": []
+                }
+              ],
+              "instances": [
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "NewSprite",
+                  "persistentUuid": "48e26fad-b174-497e-b1d5-7daa701ec9ba",
+                  "width": 0,
+                  "x": 0,
+                  "y": 0,
+                  "zOrder": 1,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                }
+              ],
+              "editionSettings": {
+                "grid": false,
+                "gridType": "rectangular",
+                "gridWidth": 32,
+                "gridHeight": 32,
+                "gridDepth": 32,
+                "gridOffsetX": 0,
+                "gridOffsetY": 0,
+                "gridOffsetZ": 0,
+                "gridColor": 10401023,
+                "gridAlpha": 0.8,
+                "snap": false,
+                "zoomFactor": 1.3993569068236624,
                 "windowMask": false,
                 "selectedLayer": "",
                 "gameEditorMode": "instances-editor"
@@ -2361,6 +3000,440 @@
           ]
         }
       ]
+    },
+    {
+      "author": "",
+      "category": "",
+      "dimension": "",
+      "extensionNamespace": "",
+      "fullName": "",
+      "gdevelopVersion": "",
+      "helpPath": "",
+      "iconUrl": "",
+      "name": "utils",
+      "previewIconUrl": "",
+      "shortDescription": "",
+      "version": "",
+      "description": "",
+      "tags": [],
+      "authorIds": [],
+      "dependencies": [],
+      "globalVariables": [],
+      "sceneVariables": [],
+      "eventsFunctions": [
+        {
+          "fullName": "",
+          "functionType": "Condition",
+          "name": "IsMouseClick",
+          "sentence": "Is Click on _PARAM1_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "IsCursorOnObject"
+                  },
+                  "parameters": [
+                    "Object",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonFromTextPressed"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Left\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Else",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "False"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "",
+              "name": "Object",
+              "type": "objectList"
+            }
+          ],
+          "objectGroups": []
+        }
+      ],
+      "eventsFunctionsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "functionName": "IsMouseClick"
+          }
+        ]
+      },
+      "eventsBasedBehaviors": [
+        {
+          "description": "",
+          "fullName": "FollowMouseCursor",
+          "helpPath": "",
+          "iconUrl": "",
+          "name": "FollowMouseCursor",
+          "objectType": "",
+          "previewIconUrl": "",
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "doStepPreEvents",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetXY"
+                      },
+                      "parameters": [
+                        "Object",
+                        "=",
+                        "CursorX()",
+                        "=",
+                        "CursorY()"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "utils::FollowMouseCursor",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "doStepPreEvents"
+              }
+            ]
+          },
+          "propertyDescriptors": [],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          }
+        }
+      ],
+      "eventsBasedObjects": []
+    },
+    {
+      "author": "",
+      "category": "",
+      "dimension": "",
+      "extensionNamespace": "",
+      "fullName": "",
+      "gdevelopVersion": "",
+      "helpPath": "",
+      "iconUrl": "",
+      "name": "Spawner",
+      "previewIconUrl": "",
+      "shortDescription": "",
+      "version": "",
+      "description": "",
+      "tags": [],
+      "authorIds": [],
+      "dependencies": [],
+      "globalVariables": [],
+      "sceneVariables": [
+        {
+          "name": "SpawnQueue",
+          "type": "array",
+          "children": []
+        }
+      ],
+      "eventsFunctions": [
+        {
+          "fullName": "",
+          "functionType": "Condition",
+          "name": "HasSpawnRequest",
+          "sentence": "",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "VariableChildCount"
+                  },
+                  "parameters": [
+                    "SpawnQueue",
+                    ">",
+                    "0"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Else",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "False"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [],
+          "objectGroups": []
+        },
+        {
+          "fullName": "",
+          "functionType": "StringExpression",
+          "name": "PollSpawnRequest",
+          "sentence": "",
+          "events": [
+            {
+              "colorB": 169,
+              "colorG": 126,
+              "colorR": 51,
+              "creationTime": 0,
+              "name": "Dequeue spawn request",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnString"
+                      },
+                      "parameters": [
+                        "ToJSON(SpawnQueue[0])"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "RemoveVariableAt"
+                      },
+                      "parameters": [
+                        "SpawnQueue",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            }
+          ],
+          "expressionType": {
+            "type": "string"
+          },
+          "parameters": [],
+          "objectGroups": []
+        },
+        {
+          "fullName": "",
+          "functionType": "Action",
+          "name": "PushSpawnRequest",
+          "sentence": "",
+          "events": [
+            {
+              "colorB": 59,
+              "colorG": 111,
+              "colorR": 80,
+              "creationTime": 0,
+              "name": "Queue spawn request",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "Data.GroupName",
+                        "=",
+                        "groupName"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "Data.ObjName",
+                        "=",
+                        "objectName"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Data.PosX",
+                        "=",
+                        "posX"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Data.PosY",
+                        "=",
+                        "posY"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "PushVariable"
+                      },
+                      "parameters": [
+                        "SpawnQueue",
+                        "Data"
+                      ]
+                    }
+                  ],
+                  "variables": [
+                    {
+                      "name": "Data",
+                      "type": "structure",
+                      "children": [
+                        {
+                          "name": "GroupName",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "ObjName",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "PosX",
+                          "type": "number",
+                          "value": 0
+                        },
+                        {
+                          "name": "PosY",
+                          "type": "number",
+                          "value": 0
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            }
+          ],
+          "parameters": [
+            {
+              "description": "",
+              "name": "objectName",
+              "type": "string"
+            },
+            {
+              "description": "",
+              "name": "posX",
+              "type": "expression"
+            },
+            {
+              "description": "",
+              "name": "posY",
+              "type": "expression"
+            },
+            {
+              "description": "",
+              "name": "groupName",
+              "type": "string"
+            }
+          ],
+          "objectGroups": []
+        }
+      ],
+      "eventsFunctionsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "functionName": "PushSpawnRequest"
+          },
+          {
+            "functionName": "PollSpawnRequest"
+          },
+          {
+            "functionName": "HasSpawnRequest"
+          }
+        ]
+      },
+      "eventsBasedBehaviors": [],
+      "eventsBasedObjects": []
     }
   ],
   "externalLayouts": []
