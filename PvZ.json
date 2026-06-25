@@ -1,5 +1,5 @@
 {
-  "firstLayout": "",
+  "firstLayout": "Main",
   "gdVersion": {
     "build": 269,
     "major": 5,
@@ -23,13 +23,41 @@
     "name": "PvZ",
     "description": "",
     "author": "",
-    "windowWidth": 800,
+    "windowWidth": 900,
     "windowHeight": 600,
     "latestCompilationDirectory": "",
     "maxFPS": 60,
     "minFPS": 20,
     "verticalSync": false,
-    "platformSpecificAssets": {},
+    "platformSpecificAssets": {
+      "android-icon-144": "",
+      "android-icon-192": "",
+      "android-icon-36": "",
+      "android-icon-48": "",
+      "android-icon-72": "",
+      "android-icon-96": "",
+      "android-windowSplashScreenAnimatedIcon": "",
+      "desktop-icon-512": "",
+      "ios-icon-100": "",
+      "ios-icon-1024": "",
+      "ios-icon-114": "",
+      "ios-icon-120": "",
+      "ios-icon-144": "",
+      "ios-icon-152": "",
+      "ios-icon-167": "",
+      "ios-icon-180": "",
+      "ios-icon-20": "",
+      "ios-icon-29": "",
+      "ios-icon-40": "",
+      "ios-icon-50": "",
+      "ios-icon-57": "",
+      "ios-icon-58": "",
+      "ios-icon-60": "",
+      "ios-icon-72": "",
+      "ios-icon-76": "",
+      "ios-icon-80": "",
+      "ios-icon-87": ""
+    },
     "loadingScreen": {
       "backgroundColor": 0,
       "backgroundFadeInDuration": 0.2,
@@ -63,16 +91,2277 @@
     "currentPlatform": "GDevelop JS platform"
   },
   "resources": {
-    "resources": []
+    "resources": [
+      {
+        "file": "assets/background1.jpg",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/background1.jpg",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/SunFlower.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/SunFlower.png",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/SunFlowerG.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/SunFlowerG.png",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/NewSprite.png",
+        "kind": "image",
+        "metadata": "{\"extension\":\".png\",\"localFilePath\":\"assets/NewSprite.png\"}",
+        "name": "NewSprite",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/Peashooter.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/Peashooter.png",
+        "smoothed": true,
+        "userAdded": false
+      },
+      {
+        "file": "assets/PeashooterG.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/PeashooterG.png",
+        "smoothed": true,
+        "userAdded": false
+      }
+    ]
   },
-  "objects": [],
+  "objects": [
+    {
+      "assetStoreId": "",
+      "name": "SunflowerCardSlot",
+      "persistentUuid": "dd414064-5816-4f35-9980-2ac8d7d10408",
+      "type": "pvz::CardSlot",
+      "variant": "Sunflower",
+      "variables": [],
+      "effects": [],
+      "behaviors": [],
+      "content": {
+        "Price": 50
+      }
+    },
+    {
+      "assetStoreId": "",
+      "name": "PeaShooterCardSlot",
+      "persistentUuid": "9fe71c61-6d9b-4246-8747-4ebc44eccf12",
+      "type": "pvz::CardSlot",
+      "variant": "PeaShooter",
+      "variables": [],
+      "effects": [],
+      "behaviors": [],
+      "content": {
+        "Price": 100
+      }
+    }
+  ],
   "objectsFolderStructure": {
-    "folderName": "__ROOT"
+    "folderName": "__ROOT",
+    "children": [
+      {
+        "objectName": "SunflowerCardSlot"
+      },
+      {
+        "objectName": "PeaShooterCardSlot"
+      }
+    ]
   },
-  "objectsGroups": [],
+  "objectsGroups": [
+    {
+      "name": "CardSlotGroup",
+      "objects": [
+        {
+          "name": "SunflowerCardSlot"
+        },
+        {
+          "name": "PeaShooterCardSlot"
+        }
+      ]
+    }
+  ],
   "variables": [],
-  "layouts": [],
-  "externalEvents": [],
-  "eventsFunctionsExtensions": [],
+  "layouts": [
+    {
+      "b": 255,
+      "disableInputWhenNotFocused": true,
+      "mangledName": "Main",
+      "name": "Main",
+      "r": 247,
+      "standardSortMethod": true,
+      "stopSoundsOnStartup": true,
+      "title": "",
+      "v": 249,
+      "uiSettings": {
+        "grid": false,
+        "gridType": "rectangular",
+        "gridWidth": 32,
+        "gridHeight": 32,
+        "gridDepth": 32,
+        "gridOffsetX": 0,
+        "gridOffsetY": 0,
+        "gridOffsetZ": 0,
+        "gridColor": 10401023,
+        "gridAlpha": 0.8,
+        "snap": false,
+        "zoomFactor": 0.7171164872656575,
+        "windowMask": false,
+        "selectedLayer": "",
+        "gameEditorMode": "instances-editor"
+      },
+      "objectsGroups": [],
+      "variables": [],
+      "instances": [
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "",
+          "name": "background1",
+          "persistentUuid": "b2bda6bd-ea56-4ec4-bc42-a18ca0b90e5c",
+          "width": 0,
+          "x": -185,
+          "y": 1,
+          "zOrder": 1,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Ground",
+          "name": "GroundSlot",
+          "persistentUuid": "67e36d4a-0056-49d9-91b7-de6dfc3cbc0f",
+          "width": 0,
+          "x": 72,
+          "y": 94,
+          "zOrder": 3,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Ground",
+          "name": "SunflowerCardSlot",
+          "persistentUuid": "ab264a8d-213e-4c38-a95a-1859f0958abd",
+          "width": 0,
+          "x": 195,
+          "y": 12,
+          "zOrder": 4,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Ground",
+          "name": "PeaShooterCardSlot",
+          "persistentUuid": "fb30a727-215e-4b40-a8b0-58a3fb77bf9c",
+          "width": 0,
+          "x": 306,
+          "y": 12,
+          "zOrder": 5,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        }
+      ],
+      "objects": [
+        {
+          "assetStoreId": "",
+          "name": "GroundSlot",
+          "persistentUuid": "92460e2a-9e5e-4f84-a70c-38d5c7971f71",
+          "type": "pvz::GroundSlot",
+          "variant": "",
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "content": {}
+        },
+        {
+          "adaptCollisionMaskAutomatically": true,
+          "assetStoreId": "",
+          "name": "background1",
+          "persistentUuid": "2d6827a0-47db-434b-882a-2278c71b12c8",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "animations": [
+            {
+              "name": "",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "assets/background1.jpg",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "objectsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "objectName": "background1"
+          },
+          {
+            "objectName": "GroundSlot"
+          }
+        ]
+      },
+      "events": [
+        {
+          "colorB": 239,
+          "colorG": 46,
+          "colorR": 100,
+          "creationTime": 0,
+          "folded": true,
+          "name": "External Events",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Link",
+              "include": {
+                "includeConfig": 0
+              },
+              "target": "Main_DrawGroundSlots"
+            }
+          ],
+          "parameters": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "IsCursorOnObject"
+              },
+              "parameters": [
+                "GroundSlot",
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "type": {
+                "value": "MouseButtonFromTextPressed"
+              },
+              "parameters": [
+                "",
+                "\"Left\""
+              ]
+            },
+            {
+              "type": {
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "DebuggerTools::ConsoleLog"
+              },
+              "parameters": [
+                "\"clicked: index = \"+ ToString(GroundSlot.Index())+\", row=\"+ToString(GroundSlot.Row())+\", column=\"+ToString(GroundSlot.Column())",
+                "\"info\"",
+                ""
+              ]
+            }
+          ]
+        }
+      ],
+      "layers": [
+        {
+          "ambientLightColorB": 200,
+          "ambientLightColorG": 200,
+          "ambientLightColorR": 200,
+          "camera2DPlaneMaxDrawingDistance": 5000,
+          "camera3DFarPlaneDistance": 10000,
+          "camera3DFieldOfView": 45,
+          "camera3DNearPlaneDistance": 3,
+          "cameraType": "",
+          "followBaseLayerCamera": false,
+          "isLightingLayer": false,
+          "isLocked": true,
+          "name": "",
+          "renderingType": "",
+          "visibility": true,
+          "cameras": [
+            {
+              "defaultSize": true,
+              "defaultViewport": true,
+              "height": 0,
+              "viewportBottom": 1,
+              "viewportLeft": 0,
+              "viewportRight": 1,
+              "viewportTop": 0,
+              "width": 0
+            }
+          ],
+          "effects": [
+            {
+              "effectType": "Scene3D::HemisphereLight",
+              "name": "3D Ambient Hemisphere Light",
+              "doubleParameters": {
+                "elevation": 40,
+                "intensity": 0.33,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "groundColor": "127;127;127",
+                "skyColor": "255;255;255",
+                "top": "Z+"
+              },
+              "booleanParameters": {}
+            },
+            {
+              "effectType": "Scene3D::DirectionalLight",
+              "name": "3D Sun Light",
+              "doubleParameters": {
+                "distanceFromCamera": 1500,
+                "elevation": 40,
+                "frustumSize": 4000,
+                "intensity": 0.75,
+                "minimumShadowBias": 0,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "color": "255;255;255",
+                "shadowQuality": "medium",
+                "top": "Z+"
+              },
+              "booleanParameters": {
+                "isCastingShadow": true
+              }
+            }
+          ]
+        },
+        {
+          "ambientLightColorB": 200,
+          "ambientLightColorG": 200,
+          "ambientLightColorR": 200,
+          "camera2DPlaneMaxDrawingDistance": 5000,
+          "camera3DFarPlaneDistance": 10000,
+          "camera3DFieldOfView": 45,
+          "camera3DNearPlaneDistance": 3,
+          "cameraType": "",
+          "followBaseLayerCamera": false,
+          "isLightingLayer": false,
+          "isLocked": false,
+          "name": "Ground",
+          "renderingType": "",
+          "visibility": true,
+          "cameras": [],
+          "effects": [
+            {
+              "effectType": "Scene3D::HemisphereLight",
+              "name": "3D Ambient Hemisphere Light",
+              "doubleParameters": {
+                "elevation": 40,
+                "intensity": 0.33,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "groundColor": "127;127;127",
+                "skyColor": "255;255;255",
+                "top": "Z+"
+              },
+              "booleanParameters": {}
+            },
+            {
+              "effectType": "Scene3D::DirectionalLight",
+              "name": "3D Sun Light",
+              "doubleParameters": {
+                "distanceFromCamera": 1500,
+                "elevation": 40,
+                "frustumSize": 4000,
+                "intensity": 0.75,
+                "minimumShadowBias": 0,
+                "rotation": 300
+              },
+              "stringParameters": {
+                "color": "255;255;255",
+                "shadowQuality": "medium",
+                "top": "Z+"
+              },
+              "booleanParameters": {
+                "isCastingShadow": true
+              }
+            }
+          ]
+        }
+      ],
+      "behaviorsSharedData": [
+        {
+          "name": "Animation",
+          "type": "AnimatableCapability::AnimatableBehavior"
+        },
+        {
+          "name": "Effect",
+          "type": "EffectCapability::EffectBehavior"
+        },
+        {
+          "name": "Flippable",
+          "type": "FlippableCapability::FlippableBehavior"
+        },
+        {
+          "name": "Opacity",
+          "type": "OpacityCapability::OpacityBehavior"
+        },
+        {
+          "name": "Resizable",
+          "type": "ResizableCapability::ResizableBehavior"
+        },
+        {
+          "name": "Scale",
+          "type": "ScalableCapability::ScalableBehavior"
+        }
+      ]
+    }
+  ],
+  "externalEvents": [
+    {
+      "associatedLayout": "Main",
+      "name": "Main_DrawGroundSlots",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "SceneJustBegins"
+              },
+              "parameters": [
+                ""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "StartX",
+                    "=",
+                    "GroundSlot.X()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "StartY",
+                    "=",
+                    "GroundSlot.Y()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Width",
+                    "=",
+                    "GroundSlot.Width()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberVariable"
+                  },
+                  "parameters": [
+                    "Height",
+                    "=",
+                    "GroundSlot.Height()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Delete"
+                  },
+                  "parameters": [
+                    "GroundSlot",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"width: \"+ Width+\",height: \"+Height",
+                    "",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Repeat",
+              "repeatExpression": "5",
+              "conditions": [],
+              "actions": [],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Repeat",
+                  "repeatExpression": "9",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "Create"
+                      },
+                      "parameters": [
+                        "",
+                        "GroundSlot",
+                        "StartX+Column*Width",
+                        "StartY+Row*Height",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ResizableCapability::ResizableBehavior::SetSize"
+                      },
+                      "parameters": [
+                        "GroundSlot",
+                        "Resizable",
+                        "Width",
+                        "Height"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::GroundSlot::SetColumn"
+                      },
+                      "parameters": [
+                        "GroundSlot",
+                        "=",
+                        "Column+1",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::GroundSlot::SetRow"
+                      },
+                      "parameters": [
+                        "GroundSlot",
+                        "=",
+                        "Row+1",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::GroundSlot::SetOccupied"
+                      },
+                      "parameters": [
+                        "GroundSlot",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Index",
+                        "=",
+                        "Index+1"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::GroundSlot::SetIndex"
+                      },
+                      "parameters": [
+                        "GroundSlot",
+                        "=",
+                        "Index",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"clicked: index = \"+ ToString(GroundSlot.Index())+\", row=\"+ToString(GroundSlot.Row())",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Column",
+                        "=",
+                        "Column+1"
+                      ]
+                    }
+                  ],
+                  "variables": [
+                    {
+                      "name": "Column",
+                      "type": "number",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Row",
+                        "=",
+                        "Row+1"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "variables": [
+                {
+                  "name": "Row",
+                  "type": "number",
+                  "value": 0
+                },
+                {
+                  "name": "Index",
+                  "type": "number",
+                  "value": 0
+                }
+              ]
+            }
+          ],
+          "variables": [
+            {
+              "name": "StartX",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "StartY",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Width",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Height",
+              "type": "number",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": []
+        }
+      ]
+    }
+  ],
+  "eventsFunctionsExtensions": [
+    {
+      "author": "",
+      "category": "",
+      "dimension": "",
+      "extensionNamespace": "",
+      "fullName": "",
+      "gdevelopVersion": "",
+      "helpPath": "",
+      "iconUrl": "",
+      "name": "pvz",
+      "previewIconUrl": "",
+      "shortDescription": "",
+      "version": "",
+      "description": "",
+      "tags": [],
+      "authorIds": [],
+      "dependencies": [],
+      "globalVariables": [],
+      "sceneVariables": [],
+      "eventsFunctions": [
+        {
+          "fullName": "",
+          "functionType": "Condition",
+          "name": "IsMouseClick",
+          "sentence": "Is Click on _PARAM1_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "IsCursorOnObject"
+                  },
+                  "parameters": [
+                    "Object",
+                    "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "MouseButtonFromTextPressed"
+                  },
+                  "parameters": [
+                    "",
+                    "\"Left\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "True"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Else",
+              "conditions": [],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetReturnBoolean"
+                  },
+                  "parameters": [
+                    "False"
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "description": "",
+              "name": "Object",
+              "supplementaryInformation": "pvz::CardSlot",
+              "type": "objectList"
+            }
+          ],
+          "objectGroups": []
+        }
+      ],
+      "eventsFunctionsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "functionName": "IsMouseClick"
+          }
+        ]
+      },
+      "eventsBasedBehaviors": [],
+      "eventsBasedObjects": [
+        {
+          "areaMaxX": 80,
+          "areaMaxY": 93,
+          "areaMaxZ": 1,
+          "areaMinX": 0,
+          "areaMinY": 0,
+          "areaMinZ": 0,
+          "defaultName": "",
+          "description": "",
+          "fullName": "",
+          "helpPath": "",
+          "iconUrl": "",
+          "isUsingLegacyInstancesRenderer": false,
+          "name": "GroundSlot",
+          "previewIconUrl": "",
+          "objects": [
+            {
+              "adaptCollisionMaskAutomatically": true,
+              "assetStoreId": "",
+              "name": "GroundSlot",
+              "persistentUuid": "eeea0e28-92a7-4e7e-83b9-efa6f09a4b7d",
+              "type": "Sprite",
+              "updateIfNotVisible": false,
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "animations": [
+                {
+                  "name": "NewSprite",
+                  "useMultipleDirections": false,
+                  "directions": [
+                    {
+                      "looping": false,
+                      "metadata": "{\"pskl\":{}}",
+                      "timeBetweenFrames": 0.08,
+                      "sprites": [
+                        {
+                          "hasCustomCollisionMask": true,
+                          "image": "NewSprite",
+                          "points": [],
+                          "originPoint": {
+                            "name": "origine",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "centerPoint": {
+                            "automatic": true,
+                            "name": "centre",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "customCollisionMask": [
+                            [
+                              {
+                                "x": 2,
+                                "y": 1
+                              },
+                              {
+                                "x": 62,
+                                "y": 1
+                              },
+                              {
+                                "x": 62,
+                                "y": 62
+                              },
+                              {
+                                "x": 2,
+                                "y": 62
+                              }
+                            ]
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "objectsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "objectName": "GroundSlot"
+              }
+            ]
+          },
+          "objectsGroups": [],
+          "layers": [
+            {
+              "ambientLightColorB": 200,
+              "ambientLightColorG": 200,
+              "ambientLightColorR": 200,
+              "camera2DPlaneMaxDrawingDistance": 5000,
+              "camera3DFarPlaneDistance": 10000,
+              "camera3DFieldOfView": 45,
+              "camera3DNearPlaneDistance": 3,
+              "cameraType": "",
+              "followBaseLayerCamera": false,
+              "isLightingLayer": false,
+              "isLocked": false,
+              "name": "",
+              "renderingType": "",
+              "visibility": true,
+              "cameras": [
+                {
+                  "defaultSize": true,
+                  "defaultViewport": true,
+                  "height": 0,
+                  "viewportBottom": 1,
+                  "viewportLeft": 0,
+                  "viewportRight": 1,
+                  "viewportTop": 0,
+                  "width": 0
+                }
+              ],
+              "effects": []
+            }
+          ],
+          "instances": [
+            {
+              "angle": 0,
+              "customSize": true,
+              "depth": 1,
+              "height": 93,
+              "keepRatio": true,
+              "layer": "",
+              "name": "GroundSlot",
+              "persistentUuid": "c208c29a-b80a-4701-a92c-6b8d16a3424b",
+              "width": 80,
+              "x": 0,
+              "y": 0,
+              "zOrder": 3,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
+            }
+          ],
+          "editionSettings": {
+            "grid": false,
+            "gridType": "rectangular",
+            "gridWidth": 32,
+            "gridHeight": 32,
+            "gridDepth": 32,
+            "gridOffsetX": 0,
+            "gridOffsetY": 0,
+            "gridOffsetZ": 0,
+            "gridColor": 10401023,
+            "gridAlpha": 0.8,
+            "snap": false,
+            "zoomFactor": 5.967517322601115,
+            "windowMask": false,
+            "selectedLayer": "",
+            "gameEditorMode": "instances-editor"
+          },
+          "behaviors": [],
+          "eventsFunctions": [
+            {
+              "description": "Check if if the ground slot is being planted..",
+              "fullName": "If the ground slot is being planted.",
+              "functionType": "Condition",
+              "group": "GroundSlot configuration",
+              "name": "Occupied",
+              "sentence": "_PARAM0_ if the ground slot is being planted.",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Occupied",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "description": "Change if if the ground slot is being planted..",
+              "fullName": "If the ground slot is being planted.",
+              "functionType": "Action",
+              "group": "GroundSlot configuration",
+              "name": "SetOccupied",
+              "sentence": "_PARAM0_ if the ground slot is being planted.: _PARAM1_",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Value",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "Occupied",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Value",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "Occupied",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                },
+                {
+                  "defaultValue": "yes",
+                  "description": "Occupied",
+                  "name": "Value",
+                  "optional": true,
+                  "type": "yesorno"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "description": "the which Row of current ground slot is in ( from 1~5) of the object.",
+              "fullName": "which Row of current ground slot is in ( from 1~5)",
+              "functionType": "ExpressionAndCondition",
+              "group": "GroundSlot configuration",
+              "name": "Row",
+              "sentence": "the which Row of current ground slot is in ( from 1~5)",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "Row"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "ActionWithOperator",
+              "getterName": "Row",
+              "group": "GroundSlot configuration",
+              "name": "SetRow",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Row",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "description": "the which Column of current ground slot is in ( from 1~9) of the object.",
+              "fullName": "which Column of current ground slot is in ( from 1~9)",
+              "functionType": "ExpressionAndCondition",
+              "group": "GroundSlot configuration",
+              "name": "Column",
+              "sentence": "the which Column of current ground slot is in ( from 1~9)",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "Column"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "ActionWithOperator",
+              "getterName": "Column",
+              "group": "GroundSlot configuration",
+              "name": "SetColumn",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Column",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "description": "the index number from 1~45 of the object.",
+              "fullName": "Index number from 1~45",
+              "functionType": "ExpressionAndCondition",
+              "group": "GroundSlot configuration",
+              "name": "Index",
+              "sentence": "the index number from 1~45",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "Index"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "ActionWithOperator",
+              "getterName": "Index",
+              "group": "GroundSlot configuration",
+              "name": "SetIndex",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Index",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "group": "GroundSlot configuration",
+              "name": "Function",
+              "sentence": "",
+              "events": [],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::GroundSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "folderName": "GroundSlot configuration",
+                "children": [
+                  {
+                    "functionName": "Occupied"
+                  },
+                  {
+                    "functionName": "Function"
+                  },
+                  {
+                    "functionName": "SetOccupied"
+                  },
+                  {
+                    "functionName": "Row"
+                  },
+                  {
+                    "functionName": "SetRow"
+                  },
+                  {
+                    "functionName": "Column"
+                  },
+                  {
+                    "functionName": "SetColumn"
+                  },
+                  {
+                    "functionName": "Index"
+                  },
+                  {
+                    "functionName": "SetIndex"
+                  }
+                ]
+              }
+            ]
+          },
+          "propertyDescriptors": [
+            {
+              "value": "",
+              "type": "Boolean",
+              "label": "If the ground slot is being planted.",
+              "hidden": true,
+              "name": "Occupied"
+            },
+            {
+              "value": "1",
+              "type": "Number",
+              "label": "Index number from 1~45",
+              "hidden": true,
+              "name": "Index"
+            },
+            {
+              "value": "0",
+              "type": "Number",
+              "label": "which Row of current ground slot is in ( from 1~5)",
+              "hidden": true,
+              "name": "Row"
+            },
+            {
+              "value": "0",
+              "type": "Number",
+              "label": "which Column of current ground slot is in ( from 1~9)",
+              "hidden": true,
+              "name": "Column"
+            },
+            {
+              "value": "",
+              "type": "String",
+              "label": "The plant's object name in current ground slot ",
+              "hidden": true,
+              "name": "PlantName"
+            }
+          ],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "PlantName"
+              },
+              {
+                "propertyName": "Row"
+              },
+              {
+                "propertyName": "Column"
+              },
+              {
+                "propertyName": "Index"
+              },
+              {
+                "propertyName": "Occupied"
+              }
+            ]
+          },
+          "variants": []
+        },
+        {
+          "areaMaxX": 100,
+          "areaMaxY": 60,
+          "areaMaxZ": 0,
+          "areaMinX": 0,
+          "areaMinY": 0,
+          "areaMinZ": 0,
+          "defaultName": "",
+          "description": "",
+          "fullName": "",
+          "helpPath": "",
+          "iconUrl": "",
+          "isUsingLegacyInstancesRenderer": false,
+          "name": "CardSlot",
+          "previewIconUrl": "",
+          "objects": [
+            {
+              "adaptCollisionMaskAutomatically": true,
+              "assetStoreId": "",
+              "name": "Sprite",
+              "persistentUuid": "bcce0568-8f62-4ac4-9c1c-ef1bca374916",
+              "type": "Sprite",
+              "updateIfNotVisible": false,
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "animations": [
+                {
+                  "name": "Normal",
+                  "useMultipleDirections": false,
+                  "directions": [
+                    {
+                      "looping": false,
+                      "timeBetweenFrames": 0.08,
+                      "sprites": [
+                        {
+                          "hasCustomCollisionMask": true,
+                          "image": "assets/SunFlower.png",
+                          "points": [],
+                          "originPoint": {
+                            "name": "origine",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "centerPoint": {
+                            "automatic": true,
+                            "name": "centre",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "customCollisionMask": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Disabled",
+                  "useMultipleDirections": false,
+                  "directions": [
+                    {
+                      "looping": false,
+                      "timeBetweenFrames": 0.08,
+                      "sprites": [
+                        {
+                          "hasCustomCollisionMask": true,
+                          "image": "assets/SunFlowerG.png",
+                          "points": [],
+                          "originPoint": {
+                            "name": "origine",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "centerPoint": {
+                            "automatic": true,
+                            "name": "centre",
+                            "x": 0,
+                            "y": 0
+                          },
+                          "customCollisionMask": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "assetStoreId": "",
+              "bold": false,
+              "italic": false,
+              "name": "PriceLabel",
+              "persistentUuid": "502ddd07-ecd2-4c21-9746-3131303886d6",
+              "smoothed": true,
+              "type": "TextObject::Text",
+              "underlined": false,
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "string": "100",
+              "font": "",
+              "textAlignment": "left",
+              "characterSize": 23,
+              "color": {
+                "b": 0,
+                "g": 0,
+                "r": 0
+              },
+              "content": {
+                "bold": false,
+                "isOutlineEnabled": false,
+                "isShadowEnabled": false,
+                "italic": false,
+                "outlineColor": "255;255;255",
+                "outlineThickness": 2,
+                "shadowAngle": 90,
+                "shadowBlurRadius": 2,
+                "shadowColor": "0;0;0",
+                "shadowDistance": 4,
+                "shadowOpacity": 127,
+                "smoothed": true,
+                "underlined": false,
+                "text": "100",
+                "font": "",
+                "textAlignment": "left",
+                "verticalTextAlignment": "top",
+                "characterSize": 23,
+                "lineHeight": 0,
+                "color": "0;0;0"
+              }
+            }
+          ],
+          "objectsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "objectName": "Sprite"
+              },
+              {
+                "objectName": "PriceLabel"
+              }
+            ]
+          },
+          "objectsGroups": [],
+          "layers": [
+            {
+              "ambientLightColorB": 200,
+              "ambientLightColorG": 200,
+              "ambientLightColorR": 200,
+              "camera2DPlaneMaxDrawingDistance": 5000,
+              "camera3DFarPlaneDistance": 10000,
+              "camera3DFieldOfView": 45,
+              "camera3DNearPlaneDistance": 3,
+              "cameraType": "",
+              "followBaseLayerCamera": false,
+              "isLightingLayer": false,
+              "isLocked": false,
+              "name": "",
+              "renderingType": "",
+              "visibility": true,
+              "cameras": [
+                {
+                  "defaultSize": true,
+                  "defaultViewport": true,
+                  "height": 0,
+                  "viewportBottom": 1,
+                  "viewportLeft": 0,
+                  "viewportRight": 1,
+                  "viewportTop": 0,
+                  "width": 0
+                }
+              ],
+              "effects": []
+            }
+          ],
+          "instances": [
+            {
+              "angle": 0,
+              "customSize": false,
+              "height": 0,
+              "keepRatio": true,
+              "layer": "",
+              "name": "Sprite",
+              "persistentUuid": "27a383de-1a28-431b-a064-836811bf129f",
+              "width": 0,
+              "x": 0,
+              "y": 0,
+              "zOrder": 2,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
+            },
+            {
+              "angle": 0,
+              "customSize": false,
+              "height": 0,
+              "keepRatio": true,
+              "layer": "",
+              "name": "PriceLabel",
+              "persistentUuid": "2381d287-5404-47b1-98d4-ae98ea960818",
+              "width": 0,
+              "x": 58,
+              "y": 35,
+              "zOrder": 3,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
+            }
+          ],
+          "editionSettings": {
+            "grid": false,
+            "gridType": "rectangular",
+            "gridWidth": 32,
+            "gridHeight": 32,
+            "gridDepth": 32,
+            "gridOffsetX": 0,
+            "gridOffsetY": 0,
+            "gridOffsetZ": 0,
+            "gridColor": 10401023,
+            "gridAlpha": 0.8,
+            "snap": false,
+            "zoomFactor": 3.264583005893555,
+            "windowMask": false,
+            "selectedLayer": "",
+            "gameEditorMode": "instances-editor"
+          },
+          "behaviors": [],
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onCreated",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "PriceLabel",
+                        "Text",
+                        "=",
+                        "Price"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "doStepPostEvents",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "pvz::IsMouseClick"
+                      },
+                      "parameters": [
+                        "",
+                        "Object",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "Object.ObjectName()",
+                        "",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "onCreated"
+              },
+              {
+                "functionName": "doStepPostEvents"
+              }
+            ]
+          },
+          "propertyDescriptors": [
+            {
+              "value": "",
+              "type": "Number",
+              "label": "",
+              "name": "Price"
+            }
+          ],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Price"
+              }
+            ]
+          },
+          "variants": [
+            {
+              "areaMaxX": 100,
+              "areaMaxY": 60,
+              "areaMaxZ": 0,
+              "areaMinX": 0,
+              "areaMinY": 0,
+              "areaMinZ": 0,
+              "name": "Sunflower",
+              "objects": [
+                {
+                  "adaptCollisionMaskAutomatically": true,
+                  "assetStoreId": "",
+                  "name": "Sprite",
+                  "persistentUuid": "bcce0568-8f62-4ac4-9c1c-ef1bca374916",
+                  "type": "Sprite",
+                  "updateIfNotVisible": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "animations": [
+                    {
+                      "name": "Normal",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/SunFlower.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disabled",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/SunFlowerG.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "assetStoreId": "",
+                  "bold": false,
+                  "italic": false,
+                  "name": "PriceLabel",
+                  "persistentUuid": "502ddd07-ecd2-4c21-9746-3131303886d6",
+                  "smoothed": true,
+                  "type": "TextObject::Text",
+                  "underlined": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "string": "100",
+                  "font": "",
+                  "textAlignment": "left",
+                  "characterSize": 23,
+                  "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0
+                  },
+                  "content": {
+                    "bold": false,
+                    "isOutlineEnabled": false,
+                    "isShadowEnabled": false,
+                    "italic": false,
+                    "outlineColor": "255;255;255",
+                    "outlineThickness": 2,
+                    "shadowAngle": 90,
+                    "shadowBlurRadius": 2,
+                    "shadowColor": "0;0;0",
+                    "shadowDistance": 4,
+                    "shadowOpacity": 127,
+                    "smoothed": true,
+                    "underlined": false,
+                    "text": "100",
+                    "font": "",
+                    "textAlignment": "left",
+                    "verticalTextAlignment": "top",
+                    "characterSize": 23,
+                    "lineHeight": 0,
+                    "color": "0;0;0"
+                  }
+                }
+              ],
+              "objectsFolderStructure": {
+                "folderName": "__ROOT",
+                "children": [
+                  {
+                    "objectName": "Sprite"
+                  },
+                  {
+                    "objectName": "PriceLabel"
+                  }
+                ]
+              },
+              "objectsGroups": [],
+              "layers": [
+                {
+                  "ambientLightColorB": 200,
+                  "ambientLightColorG": 200,
+                  "ambientLightColorR": 200,
+                  "camera2DPlaneMaxDrawingDistance": 5000,
+                  "camera3DFarPlaneDistance": 10000,
+                  "camera3DFieldOfView": 45,
+                  "camera3DNearPlaneDistance": 3,
+                  "cameraType": "",
+                  "followBaseLayerCamera": false,
+                  "isLightingLayer": false,
+                  "isLocked": false,
+                  "name": "",
+                  "renderingType": "",
+                  "visibility": true,
+                  "cameras": [
+                    {
+                      "defaultSize": true,
+                      "defaultViewport": true,
+                      "height": 0,
+                      "viewportBottom": 1,
+                      "viewportLeft": 0,
+                      "viewportRight": 1,
+                      "viewportTop": 0,
+                      "width": 0
+                    }
+                  ],
+                  "effects": []
+                }
+              ],
+              "instances": [
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "Sprite",
+                  "persistentUuid": "27a383de-1a28-431b-a064-836811bf129f",
+                  "width": 0,
+                  "x": 0,
+                  "y": 0,
+                  "zOrder": 2,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                },
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "PriceLabel",
+                  "persistentUuid": "2381d287-5404-47b1-98d4-ae98ea960818",
+                  "width": 0,
+                  "x": 58,
+                  "y": 35,
+                  "zOrder": 3,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                }
+              ],
+              "editionSettings": {
+                "grid": false,
+                "gridType": "rectangular",
+                "gridWidth": 32,
+                "gridHeight": 32,
+                "gridDepth": 32,
+                "gridOffsetX": 0,
+                "gridOffsetY": 0,
+                "gridOffsetZ": 0,
+                "gridColor": 10401023,
+                "gridAlpha": 0.8,
+                "snap": false,
+                "zoomFactor": 2.675527197226908,
+                "windowMask": false,
+                "selectedLayer": "",
+                "gameEditorMode": "instances-editor"
+              }
+            },
+            {
+              "areaMaxX": 100,
+              "areaMaxY": 60,
+              "areaMaxZ": 0,
+              "areaMinX": 0,
+              "areaMinY": 0,
+              "areaMinZ": 0,
+              "name": "PeaShooter",
+              "objects": [
+                {
+                  "adaptCollisionMaskAutomatically": true,
+                  "assetStoreId": "",
+                  "name": "Sprite",
+                  "persistentUuid": "bcce0568-8f62-4ac4-9c1c-ef1bca374916",
+                  "type": "Sprite",
+                  "updateIfNotVisible": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "animations": [
+                    {
+                      "name": "Normal",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/Peashooter.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": [
+                                [
+                                  {
+                                    "x": 0,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 100,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 100,
+                                    "y": 60
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 60
+                                  }
+                                ]
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Disabled",
+                      "useMultipleDirections": false,
+                      "directions": [
+                        {
+                          "looping": false,
+                          "timeBetweenFrames": 0.08,
+                          "sprites": [
+                            {
+                              "hasCustomCollisionMask": true,
+                              "image": "assets/PeashooterG.png",
+                              "points": [],
+                              "originPoint": {
+                                "name": "origine",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "centerPoint": {
+                                "automatic": true,
+                                "name": "centre",
+                                "x": 0,
+                                "y": 0
+                              },
+                              "customCollisionMask": [
+                                [
+                                  {
+                                    "x": 0,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 100,
+                                    "y": 0
+                                  },
+                                  {
+                                    "x": 100,
+                                    "y": 60
+                                  },
+                                  {
+                                    "x": 0,
+                                    "y": 60
+                                  }
+                                ]
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "assetStoreId": "",
+                  "bold": false,
+                  "italic": false,
+                  "name": "PriceLabel",
+                  "persistentUuid": "502ddd07-ecd2-4c21-9746-3131303886d6",
+                  "smoothed": true,
+                  "type": "TextObject::Text",
+                  "underlined": false,
+                  "variables": [],
+                  "effects": [],
+                  "behaviors": [],
+                  "string": "100",
+                  "font": "",
+                  "textAlignment": "left",
+                  "characterSize": 23,
+                  "color": {
+                    "b": 0,
+                    "g": 0,
+                    "r": 0
+                  },
+                  "content": {
+                    "bold": false,
+                    "isOutlineEnabled": false,
+                    "isShadowEnabled": false,
+                    "italic": false,
+                    "outlineColor": "255;255;255",
+                    "outlineThickness": 2,
+                    "shadowAngle": 90,
+                    "shadowBlurRadius": 2,
+                    "shadowColor": "0;0;0",
+                    "shadowDistance": 4,
+                    "shadowOpacity": 127,
+                    "smoothed": true,
+                    "underlined": false,
+                    "text": "100",
+                    "font": "",
+                    "textAlignment": "left",
+                    "verticalTextAlignment": "top",
+                    "characterSize": 23,
+                    "lineHeight": 0,
+                    "color": "0;0;0"
+                  }
+                }
+              ],
+              "objectsFolderStructure": {
+                "folderName": "__ROOT",
+                "children": [
+                  {
+                    "objectName": "Sprite"
+                  },
+                  {
+                    "objectName": "PriceLabel"
+                  }
+                ]
+              },
+              "objectsGroups": [],
+              "layers": [
+                {
+                  "ambientLightColorB": 200,
+                  "ambientLightColorG": 200,
+                  "ambientLightColorR": 200,
+                  "camera2DPlaneMaxDrawingDistance": 5000,
+                  "camera3DFarPlaneDistance": 10000,
+                  "camera3DFieldOfView": 45,
+                  "camera3DNearPlaneDistance": 3,
+                  "cameraType": "",
+                  "followBaseLayerCamera": false,
+                  "isLightingLayer": false,
+                  "isLocked": false,
+                  "name": "",
+                  "renderingType": "",
+                  "visibility": true,
+                  "cameras": [
+                    {
+                      "defaultSize": true,
+                      "defaultViewport": true,
+                      "height": 0,
+                      "viewportBottom": 1,
+                      "viewportLeft": 0,
+                      "viewportRight": 1,
+                      "viewportTop": 0,
+                      "width": 0
+                    }
+                  ],
+                  "effects": []
+                }
+              ],
+              "instances": [
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "Sprite",
+                  "persistentUuid": "27a383de-1a28-431b-a064-836811bf129f",
+                  "width": 0,
+                  "x": 0,
+                  "y": 0,
+                  "zOrder": 2,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                },
+                {
+                  "angle": 0,
+                  "customSize": false,
+                  "height": 0,
+                  "keepRatio": true,
+                  "layer": "",
+                  "name": "PriceLabel",
+                  "persistentUuid": "2381d287-5404-47b1-98d4-ae98ea960818",
+                  "width": 0,
+                  "x": 58,
+                  "y": 35,
+                  "zOrder": 3,
+                  "numberProperties": [],
+                  "stringProperties": [],
+                  "initialVariables": []
+                }
+              ],
+              "editionSettings": {
+                "grid": false,
+                "gridType": "rectangular",
+                "gridWidth": 32,
+                "gridHeight": 32,
+                "gridDepth": 32,
+                "gridOffsetX": 0,
+                "gridOffsetY": 0,
+                "gridOffsetZ": 0,
+                "gridColor": 10401023,
+                "gridAlpha": 0.8,
+                "snap": false,
+                "zoomFactor": 2.675527197226908,
+                "windowMask": false,
+                "selectedLayer": "",
+                "gameEditorMode": "instances-editor"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "externalLayouts": []
 }
