@@ -711,7 +711,8 @@
       ],
       "content": {
         "SunGroupName": "Spawnable",
-        "SunName": "Sun"
+        "SunName": "Sun",
+        "SunSpawnInterval": 6
       }
     },
     {
@@ -732,7 +733,9 @@
       "variables": [],
       "effects": [],
       "behaviors": [],
-      "content": {}
+      "content": {
+        "SunValue": 50
+      }
     },
     {
       "assetStoreId": "",
@@ -848,7 +851,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 1.0328169125298379,
+        "zoomFactor": 1.0676438397327972,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -856,9 +859,25 @@
       "objectsGroups": [],
       "variables": [
         {
-          "name": "PickedCard",
-          "type": "string",
-          "value": ""
+          "name": "PickingCard",
+          "type": "structure",
+          "children": [
+            {
+              "name": "IsPicking",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "ObjectName",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "Price",
+              "type": "number",
+              "value": 0
+            }
+          ]
         }
       ],
       "instances": [
@@ -1071,6 +1090,7 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
+          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -1129,12 +1149,21 @@
                 },
                 {
                   "type": {
-                    "value": "StringVariable"
+                    "value": "BooleanVariable"
                   },
                   "parameters": [
-                    "PickedCard",
+                    "PickingCard.IsPicking",
                     "=",
                     "\"\""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "pvz::CardSlot::CanUse"
+                  },
+                  "parameters": [
+                    "CardSlotGroup",
+                    ""
                   ]
                 }
               ],
@@ -1163,22 +1192,32 @@
                 },
                 {
                   "type": {
+                    "value": "SetBooleanVariable"
+                  },
+                  "parameters": [
+                    "PickingCard.IsPicking",
+                    "True",
+                    "CardPreviewGroup.PlantName()"
+                  ]
+                },
+                {
+                  "type": {
                     "value": "SetStringVariable"
                   },
                   "parameters": [
-                    "PickedCard",
+                    "PickingCard.ObjectName",
                     "=",
                     "CardPreviewGroup.PlantName()"
                   ]
                 },
                 {
                   "type": {
-                    "value": "DebuggerTools::ConsoleLog"
+                    "value": "SetNumberVariable"
                   },
                   "parameters": [
-                    "\"Planting: \"+ PickedCard",
-                    "",
-                    ""
+                    "PickingCard.Price",
+                    "=",
+                    "CardSlotGroup.Price()"
                   ]
                 }
               ]
@@ -1191,6 +1230,7 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
+          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -1216,11 +1256,11 @@
                     },
                     {
                       "type": {
-                        "value": "StringVariable"
+                        "value": "BooleanVariable"
                       },
                       "parameters": [
-                        "PickedCard",
-                        "!=",
+                        "PickingCard.IsPicking",
+                        "True",
                         "\"\""
                       ]
                     },
@@ -1263,7 +1303,7 @@
                       "parameters": [
                         "",
                         "PlantsGroup",
-                        "PickedCard",
+                        "PickingCard.ObjectName",
                         "GroundSlot.X()",
                         "GroundSlot.Y()",
                         "\"Battle\""
@@ -1271,11 +1311,11 @@
                     },
                     {
                       "type": {
-                        "value": "SetStringVariable"
+                        "value": "SetBooleanVariable"
                       },
                       "parameters": [
-                        "PickedCard",
-                        "=",
+                        "PickingCard.IsPicking",
+                        "False",
                         "\"\""
                       ]
                     },
@@ -1294,10 +1334,59 @@
                       },
                       "parameters": [
                         "SunCountBoard",
-                        "50",
+                        "PickingCard.Price",
                         "SunCountBoard.SunCount() - PlantsGroup."
                       ]
                     }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": []
+        },
+        {
+          "colorB": 177,
+          "colorG": 211,
+          "colorR": 135,
+          "creationTime": 0,
+          "name": "Sun Collecting",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "Sun",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "utils::IsMouseClick"
+                  },
+                  "parameters": [
+                    "",
+                    "Sun",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "pvz::SunCountBoard::AddSun"
+                  },
+                  "parameters": [
+                    "SunCountBoard",
+                    "Sun.SunValue()",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "Delete"
+                  },
+                  "parameters": [
+                    "Sun",
+                    ""
                   ]
                 }
               ]
@@ -1621,10 +1710,6 @@
         {
           "name": "Scale",
           "type": "ScalableCapability::ScalableBehavior"
-        },
-        {
-          "name": "Text",
-          "type": "TextContainerCapability::TextContainerBehavior"
         }
       ]
     }
@@ -3080,10 +3165,11 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "pvz::CardSlot::CanUse"
+                        "value": "BooleanVariable"
                       },
                       "parameters": [
-                        "Object",
+                        "CanUse",
+                        "True",
                         ""
                       ]
                     }
@@ -3102,12 +3188,41 @@
                     },
                     {
                       "type": {
-                        "value": "pvz::CardSlot::SetCanUse"
+                        "value": "SetBooleanVariable"
                       },
                       "parameters": [
-                        "Object",
-                        "",
+                        "CanUse",
+                        "False",
                         ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Wait"
+                      },
+                      "parameters": [
+                        "3"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "CanUse",
+                        "True",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "Sprite",
+                        "Animation",
+                        "=",
+                        "\"Normal\""
                       ]
                     }
                   ]
@@ -3315,6 +3430,70 @@
               ],
               "parameters": [],
               "objectGroups": []
+            },
+            {
+              "description": "the price of the object.",
+              "fullName": "Price",
+              "functionType": "ExpressionAndCondition",
+              "group": "CardSlot configuration",
+              "name": "Price",
+              "sentence": "the price",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "Price"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "ActionWithOperator",
+              "getterName": "Price",
+              "group": "CardSlot configuration",
+              "name": "SetPrice",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Price",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -3343,6 +3522,12 @@
                   },
                   {
                     "functionName": "SetPreviewObjectName"
+                  },
+                  {
+                    "functionName": "Price"
+                  },
+                  {
+                    "functionName": "SetPrice"
                   }
                 ]
               }
@@ -5504,7 +5689,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 1.765021088826537,
+            "zoomFactor": 5.634519864159123,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -7125,7 +7310,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 2.542046743985348,
+            "zoomFactor": 3.0005358510051083,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -7171,6 +7356,70 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "description": "the sunValue of the object.",
+              "fullName": "SunValue",
+              "functionType": "ExpressionAndCondition",
+              "group": "Sun configuration",
+              "name": "SunValue",
+              "sentence": "the sunValue",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "SunValue"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Sun",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "ActionWithOperator",
+              "getterName": "SunValue",
+              "group": "Sun configuration",
+              "name": "SetSunValue",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "SunValue",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -7178,6 +7427,17 @@
             "children": [
               {
                 "functionName": "onPlacedInScene"
+              },
+              {
+                "folderName": "Sun configuration",
+                "children": [
+                  {
+                    "functionName": "SunValue"
+                  },
+                  {
+                    "functionName": "SetSunValue"
+                  }
+                ]
               }
             ]
           },
@@ -7186,14 +7446,14 @@
               "value": "",
               "type": "Number",
               "label": "",
-              "name": "Property"
+              "name": "SunValue"
             }
           ],
           "propertiesFolderStructure": {
             "folderName": "__ROOT",
             "children": [
               {
-                "propertyName": "Property"
+                "propertyName": "SunValue"
               }
             ]
           },
@@ -7499,6 +7759,17 @@
                         "=",
                         "SunCount+Value"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "SunCountLabel",
+                        "Text",
+                        "=",
+                        "SunCount"
+                      ]
                     }
                   ]
                 }
@@ -7536,6 +7807,17 @@
                         "SunCount",
                         "=",
                         "SunCount-Value"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                      },
+                      "parameters": [
+                        "SunCountLabel",
+                        "Text",
+                        "=",
+                        "SunCount"
                       ]
                     }
                   ]
