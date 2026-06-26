@@ -1632,7 +1632,18 @@
       "name": "Sunflower",
       "type": "pvz::Sunflower",
       "variant": "",
-      "variables": [],
+      "variables": [
+        {
+          "name": "Column",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "Row",
+          "type": "number",
+          "value": 0
+        }
+      ],
       "effects": [],
       "behaviors": [
         {
@@ -1656,7 +1667,19 @@
       "name": "PeaShooter",
       "type": "pvz::PeaShooter",
       "variant": "",
-      "variables": [],
+      "variables": [
+        {
+          "name": "Column",
+          "type": "number",
+          "value": 0
+        },
+        {
+          "name": "Row",
+          "persistentUuid": "8b63cb7d-f9e3-4c1d-a535-b23ef153114c",
+          "type": "number",
+          "value": 1
+        }
+      ],
       "effects": [],
       "behaviors": [
         {
@@ -1667,6 +1690,11 @@
           "TimerLength": 1,
           "Limit": -1,
           "Counter": 0
+        },
+        {
+          "isInheritedFromObjectType": true,
+          "name": "ShooterPlants",
+          "type": "pvz::ShooterPlants"
         }
       ],
       "content": {
@@ -1723,10 +1751,40 @@
       "persistentUuid": "85686fa2-3590-4723-a925-7f2e4d90d840",
       "type": "pvz::Zombie",
       "variant": "",
-      "variables": [],
+      "variables": [
+        {
+          "name": "Row",
+          "type": "number",
+          "value": 0
+        }
+      ],
       "effects": [],
       "behaviors": [],
       "content": {}
+    },
+    {
+      "assetStoreId": "",
+      "name": "Test",
+      "type": "pvz::Test",
+      "variant": "",
+      "variables": [
+        {
+          "name": "Row",
+          "persistentUuid": "8b63cb7d-f9e3-4c1d-a535-b23ef153114c",
+          "type": "number",
+          "value": 1
+        }
+      ],
+      "effects": [],
+      "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "ShooterPlants",
+          "type": "pvz::ShooterPlants"
+        }
+      ],
+      "content": {},
+      "childrenContent": {}
     }
   ],
   "objectsFolderStructure": {
@@ -1761,6 +1819,9 @@
       },
       {
         "objectName": "Zombie"
+      },
+      {
+        "objectName": "Test"
       }
     ]
   },
@@ -1819,6 +1880,17 @@
           "name": "Zombie"
         }
       ]
+    },
+    {
+      "name": "ShooterPlantsGroup",
+      "objects": [
+        {
+          "name": "PeaShooter"
+        },
+        {
+          "name": "Test"
+        }
+      ]
     }
   ],
   "variables": [],
@@ -1845,7 +1917,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.42183322780332844,
+        "zoomFactor": 0.4360575834836693,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2100,7 +2172,6 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
-          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2127,6 +2198,17 @@
                     "=",
                     "200",
                     ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "SetNumberObjectVariable"
+                  },
+                  "parameters": [
+                    "Zombie",
+                    "Row",
+                    "=",
+                    "1"
                   ]
                 }
               ]
@@ -2252,7 +2334,6 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2359,6 +2440,35 @@
                         "PickingCard.Price",
                         "SunCountBoard.SunCount() - PlantsGroup."
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberObjectVariable"
+                      },
+                      "parameters": [
+                        "PlantsGroup",
+                        "Row",
+                        "=",
+                        "GroundSlot.Row()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberObjectVariable"
+                      },
+                      "parameters": [
+                        "PlantsGroup",
+                        "Column",
+                        "=",
+                        "GroundSlot.Column()"
+                      ]
+                    }
+                  ],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": []
                     }
                   ]
                 }
@@ -2372,6 +2482,7 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
+          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2486,6 +2597,48 @@
             }
           ],
           "parameters": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [],
+          "actions": []
+        },
+        {
+          "type": "BuiltinCommonInstructions::ForEach",
+          "object": "ZombiesGroup",
+          "conditions": [],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "ShooterPlantsGroup",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "NumberObjectVariable"
+                  },
+                  "parameters": [
+                    "ShooterPlantsGroup",
+                    "Row",
+                    "=",
+                    "ZombiesGroup.Row"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "pvz::ShooterPlants::Shoot"
+                  },
+                  "parameters": [
+                    "ShooterPlantsGroup",
+                    "ShooterPlants",
+                    ""
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "layers": [
@@ -2803,6 +2956,10 @@
         {
           "name": "Scale",
           "type": "ScalableCapability::ScalableBehavior"
+        },
+        {
+          "name": "ShooterPlants",
+          "type": "pvz::ShooterPlants"
         }
       ]
     }
@@ -3160,7 +3317,69 @@
       "eventsFunctionsFolderStructure": {
         "folderName": "__ROOT"
       },
-      "eventsBasedBehaviors": [],
+      "eventsBasedBehaviors": [
+        {
+          "description": "",
+          "fullName": "ShooterPlants",
+          "helpPath": "",
+          "iconUrl": "",
+          "name": "ShooterPlants",
+          "objectType": "",
+          "previewIconUrl": "",
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "Shoot",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"shoot...\"",
+                        "",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::ShooterPlants",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "Shoot"
+              }
+            ]
+          },
+          "propertyDescriptors": [],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          }
+        }
+      ],
       "eventsBasedObjects": [
         {
           "areaMaxX": 40,
@@ -7574,6 +7793,10 @@
               "TimerLength": 1,
               "Limit": -1,
               "Counter": 0
+            },
+            {
+              "name": "ShooterPlants",
+              "type": "pvz::ShooterPlants"
             }
           ],
           "eventsFunctions": [
@@ -13838,6 +14061,91 @@
                 "functionName": "Attack"
               }
             ]
+          },
+          "propertyDescriptors": [],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          },
+          "variants": []
+        },
+        {
+          "areaMaxX": 64,
+          "areaMaxY": 64,
+          "areaMaxZ": 64,
+          "areaMinX": 0,
+          "areaMinY": 0,
+          "areaMinZ": 0,
+          "defaultName": "",
+          "description": "",
+          "fullName": "Test",
+          "helpPath": "",
+          "iconUrl": "",
+          "isUsingLegacyInstancesRenderer": false,
+          "name": "Test",
+          "previewIconUrl": "",
+          "objects": [],
+          "objectsFolderStructure": {
+            "folderName": "__ROOT"
+          },
+          "objectsGroups": [],
+          "layers": [
+            {
+              "ambientLightColorB": 200,
+              "ambientLightColorG": 200,
+              "ambientLightColorR": 200,
+              "camera2DPlaneMaxDrawingDistance": 5000,
+              "camera3DFarPlaneDistance": 10000,
+              "camera3DFieldOfView": 45,
+              "camera3DNearPlaneDistance": 3,
+              "cameraType": "",
+              "followBaseLayerCamera": false,
+              "isLightingLayer": false,
+              "isLocked": false,
+              "name": "",
+              "renderingType": "",
+              "visibility": true,
+              "cameras": [
+                {
+                  "defaultSize": true,
+                  "defaultViewport": true,
+                  "height": 0,
+                  "viewportBottom": 1,
+                  "viewportLeft": 0,
+                  "viewportRight": 1,
+                  "viewportTop": 0,
+                  "width": 0
+                }
+              ],
+              "effects": []
+            }
+          ],
+          "instances": [],
+          "editionSettings": {
+            "grid": false,
+            "gridType": "rectangular",
+            "gridWidth": 32,
+            "gridHeight": 32,
+            "gridDepth": 32,
+            "gridOffsetX": 0,
+            "gridOffsetY": 0,
+            "gridOffsetZ": 0,
+            "gridColor": 10401023,
+            "gridAlpha": 0.8,
+            "snap": false,
+            "zoomFactor": 10.9375,
+            "windowMask": false,
+            "selectedLayer": "",
+            "gameEditorMode": "instances-editor"
+          },
+          "behaviors": [
+            {
+              "name": "ShooterPlants",
+              "type": "pvz::ShooterPlants"
+            }
+          ],
+          "eventsFunctions": [],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT"
           },
           "propertyDescriptors": [],
           "propertiesFolderStructure": {
