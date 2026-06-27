@@ -1555,6 +1555,14 @@
         "name": "assets/BoomDie_17.png",
         "smoothed": true,
         "userAdded": false
+      },
+      {
+        "file": "assets/PeaBulletHit.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "assets/PeaBulletHit.png",
+        "smoothed": true,
+        "userAdded": false
       }
     ]
   },
@@ -1675,9 +1683,9 @@
         },
         {
           "name": "Row",
-          "persistentUuid": "8b63cb7d-f9e3-4c1d-a535-b23ef153114c",
+          "persistentUuid": "bbb8bc40-c024-42a9-ac61-858fef5b640b",
           "type": "number",
-          "value": 1
+          "value": 0
         }
       ],
       "effects": [],
@@ -1736,6 +1744,12 @@
       "effects": [],
       "behaviors": [
         {
+          "isInheritedFromObjectType": true,
+          "name": "BulletHit",
+          "type": "pvz::BulletHit",
+          "Hit": false
+        },
+        {
           "extraBorder": 100,
           "isInheritedFromObjectType": true,
           "name": "DestroyOutside",
@@ -1770,9 +1784,9 @@
       "variables": [
         {
           "name": "Row",
-          "persistentUuid": "8b63cb7d-f9e3-4c1d-a535-b23ef153114c",
+          "persistentUuid": "bbb8bc40-c024-42a9-ac61-858fef5b640b",
           "type": "number",
-          "value": 1
+          "value": 0
         }
       ],
       "effects": [],
@@ -1891,6 +1905,14 @@
           "name": "Test"
         }
       ]
+    },
+    {
+      "name": "BulletsGroup",
+      "objects": [
+        {
+          "name": "PeaBullet"
+        }
+      ]
     }
   ],
   "variables": [],
@@ -1917,7 +1939,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.4360575834836693,
+        "zoomFactor": 0.4816737915491939,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2172,6 +2194,7 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
+          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2334,6 +2357,7 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
+          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2482,7 +2506,6 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
-          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2562,11 +2585,77 @@
           "colorG": 140,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Battle Logic",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
           "events": [
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 109,
+                "g": 230,
+                "r": 255,
+                "textB": 0,
+                "textG": 0,
+                "textR": 0
+              },
+              "comment": "Check If Can Shoot for Shooter Plants"
+            },
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "ZombiesGroup",
+              "conditions": [],
+              "actions": [],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "ShooterPlantsGroup",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberObjectVariable"
+                      },
+                      "parameters": [
+                        "ShooterPlantsGroup",
+                        "Row",
+                        "=",
+                        "ZombiesGroup.Row"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::Once"
+                      },
+                      "parameters": []
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "pvz::ShooterPlants::Shoot"
+                      },
+                      "parameters": [
+                        "ShooterPlantsGroup",
+                        "ShooterPlants",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 109,
+                "g": 230,
+                "r": 255,
+                "textB": 0,
+                "textG": 0,
+                "textR": 0
+              },
+              "comment": "Zombies Attack Plants"
+            },
             {
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
@@ -2581,6 +2670,12 @@
                     "",
                     ""
                   ]
+                },
+                {
+                  "type": {
+                    "value": "BuiltinCommonInstructions::Once"
+                  },
+                  "parameters": []
                 }
               ],
               "actions": [
@@ -2594,6 +2689,66 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Comment",
+              "color": {
+                "b": 109,
+                "g": 230,
+                "r": 255,
+                "textB": 0,
+                "textG": 0,
+                "textR": 0
+              },
+              "comment": "Bullet Hit  Zombies"
+            },
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "CollisionNP"
+                  },
+                  "parameters": [
+                    "BulletsGroup",
+                    "ZombiesGroup",
+                    "",
+                    "",
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "pvz::Zombie::TakeDamage"
+                  },
+                  "parameters": [
+                    "ZombiesGroup",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"bullet shoot\"",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "pvz::BulletHit::PerformHit"
+                  },
+                  "parameters": [
+                    "BulletsGroup",
+                    "BulletHit",
+                    ""
+                  ]
+                }
+              ]
             }
           ],
           "parameters": []
@@ -2602,43 +2757,6 @@
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [],
           "actions": []
-        },
-        {
-          "type": "BuiltinCommonInstructions::ForEach",
-          "object": "ZombiesGroup",
-          "conditions": [],
-          "actions": [],
-          "events": [
-            {
-              "type": "BuiltinCommonInstructions::ForEach",
-              "object": "ShooterPlantsGroup",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "NumberObjectVariable"
-                  },
-                  "parameters": [
-                    "ShooterPlantsGroup",
-                    "Row",
-                    "=",
-                    "ZombiesGroup.Row"
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "pvz::ShooterPlants::Shoot"
-                  },
-                  "parameters": [
-                    "ShooterPlantsGroup",
-                    "ShooterPlants",
-                    ""
-                  ]
-                }
-              ]
-            }
-          ]
         }
       ],
       "layers": [
@@ -3346,6 +3464,88 @@
                         "",
                         ""
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "ShouldShoot",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::ShooterPlants",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Condition",
+              "name": "HasShootSignal",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "ShouldShoot",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "ShouldShoot",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "False"
+                      ]
                     }
                   ]
                 }
@@ -3371,12 +3571,151 @@
             "children": [
               {
                 "functionName": "Shoot"
+              },
+              {
+                "functionName": "HasShootSignal"
               }
             ]
           },
-          "propertyDescriptors": [],
+          "propertyDescriptors": [
+            {
+              "value": "",
+              "type": "Boolean",
+              "label": "",
+              "name": "ShouldShoot"
+            }
+          ],
           "propertiesFolderStructure": {
-            "folderName": "__ROOT"
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "ShouldShoot"
+              }
+            ]
+          }
+        },
+        {
+          "description": "",
+          "fullName": "BulletHit",
+          "helpPath": "",
+          "iconUrl": "",
+          "name": "BulletHit",
+          "objectType": "",
+          "previewIconUrl": "",
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "PerformHit",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "Hit",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::BulletHit",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Condition",
+              "name": "IsHitSomething",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Hit",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::BulletHit",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "PerformHit"
+              },
+              {
+                "functionName": "IsHitSomething"
+              }
+            ]
+          },
+          "propertyDescriptors": [
+            {
+              "value": "",
+              "type": "Boolean",
+              "label": "",
+              "hidden": true,
+              "name": "Hit"
+            }
+          ],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Hit"
+              }
+            ]
           }
         }
       ],
@@ -7810,6 +8149,7 @@
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
+                      "disabled": true,
                       "type": {
                         "value": "BooleanVariable"
                       },
@@ -7828,6 +8168,16 @@
                         "RepeatTimer",
                         "\"ShootBullet\"",
                         "3",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::ShooterPlants::HasShootSignal"
+                      },
+                      "parameters": [
+                        "Object",
+                        "ShooterPlants",
                         ""
                       ]
                     }
@@ -9405,7 +9755,7 @@
           "previewIconUrl": "",
           "objects": [
             {
-              "adaptCollisionMaskAutomatically": true,
+              "adaptCollisionMaskAutomatically": false,
               "assetStoreId": "",
               "name": "PeaBullet",
               "persistentUuid": "a2c4f740-bbbf-47ce-ad19-af2871290825",
@@ -9416,7 +9766,7 @@
               "behaviors": [],
               "animations": [
                 {
-                  "name": "",
+                  "name": "Normal",
                   "useMultipleDirections": false,
                   "directions": [
                     {
@@ -9438,7 +9788,74 @@
                             "x": 40,
                             "y": 17
                           },
-                          "customCollisionMask": []
+                          "customCollisionMask": [
+                            [
+                              {
+                                "x": 0,
+                                "y": 0
+                              },
+                              {
+                                "x": 56,
+                                "y": 0
+                              },
+                              {
+                                "x": 56,
+                                "y": 34
+                              },
+                              {
+                                "x": 0,
+                                "y": 34
+                              }
+                            ]
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Hit",
+                  "useMultipleDirections": false,
+                  "directions": [
+                    {
+                      "looping": false,
+                      "timeBetweenFrames": 0.08,
+                      "sprites": [
+                        {
+                          "hasCustomCollisionMask": true,
+                          "image": "assets/PeaBulletHit.png",
+                          "points": [],
+                          "originPoint": {
+                            "name": "origine",
+                            "x": 40,
+                            "y": 17
+                          },
+                          "centerPoint": {
+                            "automatic": false,
+                            "name": "centre",
+                            "x": 40,
+                            "y": 17
+                          },
+                          "customCollisionMask": [
+                            [
+                              {
+                                "x": 0,
+                                "y": 0
+                              },
+                              {
+                                "x": 56,
+                                "y": 0
+                              },
+                              {
+                                "x": 56,
+                                "y": 34
+                              },
+                              {
+                                "x": 0,
+                                "y": 34
+                              }
+                            ]
+                          ]
                         }
                       ]
                     }
@@ -9517,16 +9934,21 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 3.9122201073538525,
+            "zoomFactor": 4.044141460720372,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
           },
           "behaviors": [
             {
-              "extraBorder": 100,
+              "name": "BulletHit",
+              "type": "pvz::BulletHit",
+              "Hit": false
+            },
+            {
               "name": "DestroyOutside",
               "type": "DestroyOutsideBehavior::DestroyOutside",
+              "extraBorder": 100,
               "unseenGraceDistance": 100
             }
           ],
@@ -9539,7 +9961,19 @@
               "events": [
                 {
                   "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
+                  "conditions": [
+                    {
+                      "type": {
+                        "inverted": true,
+                        "value": "pvz::BulletHit::IsHitSomething"
+                      },
+                      "parameters": [
+                        "Object",
+                        "BulletHit",
+                        ""
+                      ]
+                    }
+                  ],
                   "actions": [
                     {
                       "type": {
@@ -9549,6 +9983,40 @@
                         "Object",
                         "=",
                         "Object.X()+ TimeDelta() * 200"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Else",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "PeaBullet",
+                        "Animation",
+                        "=",
+                        "\"Hit\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Wait"
+                      },
+                      "parameters": [
+                        "0.3"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Delete"
+                      },
+                      "parameters": [
+                        "Object",
+                        ""
                       ]
                     }
                   ]
@@ -14049,6 +14517,40 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "TakeDamage",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "NewSprite",
+                        "Animation",
+                        "=",
+                        "\"Die\""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Zombie",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -14059,6 +14561,9 @@
               },
               {
                 "functionName": "Attack"
+              },
+              {
+                "functionName": "TakeDamage"
               }
             ]
           },
