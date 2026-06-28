@@ -1579,7 +1579,10 @@
       "content": {
         "Price": 50,
         "PreviewObjectName": "SunflowerCardPreview",
-        "PreviewGroupName": "CardPreviewGroup"
+        "PreviewGroupName": "CardPreviewGroup",
+        "PlantName": "Sunflower",
+        "LayerName": "Spawnable",
+        "CardConfig": "{{cards.Sunflower}}"
       }
     },
     {
@@ -1594,7 +1597,9 @@
       "content": {
         "Price": 100,
         "PreviewObjectName": "PeaShooterCardPreview",
-        "PreviewGroupName": "CardPreviewGroup"
+        "PreviewGroupName": "CardPreviewGroup",
+        "LayerName": "Spawnable",
+        "PlantName": "{{cards.PeaShooter.name}}"
       }
     },
     {
@@ -1630,7 +1635,7 @@
       ],
       "content": {
         "Layer": "UI",
-        "PlantName": "PeaShooter"
+        "PlantName": ""
       }
     },
     {
@@ -1985,6 +1990,23 @@
     }
   ],
   "variables": [],
+  "globalConfig": {
+    "cards": {
+      "PeaShooter": {
+        "price": 100,
+        "previewObjectName": "PeaShooterCardPreview",
+        "plantName": "PeaShooter",
+        "previewLayerName": "Spawnable"
+      },
+      "Sunflower": {
+        "price": 50,
+        "previewObjectName": "SunflowerCardPreview",
+        "plantName": "Sunflower",
+        "previewLayerName": "Spawnable"
+      }
+    },
+    "people": {}
+  },
   "layouts": [
     {
       "b": 255,
@@ -2008,7 +2030,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.497915990791233,
+        "zoomFactor": 0.45076158913273007,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2263,7 +2285,6 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
-          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2301,6 +2322,59 @@
                     "Row",
                     "=",
                     "1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"config :\"+ConfigString(\"{{cards.Sunflower.price}}\")",
+                    "\"info\"",
+                    ""
+                  ]
+                }
+              ],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "GlobalConfigBoolean"
+                      },
+                      "parameters": [
+                        "{{cards.PeaShooter.canUse}}",
+                        "True"
+                      ]
+                    }
+                  ],
+                  "actions": []
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "GlobalConfigBoolean"
+                      },
+                      "parameters": [
+                        "{{cards.Sunflower.canUse}}",
+                        "True"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "ConfigToJSON(\"{{cards.PeaShooter}}\")",
+                        "",
+                        ""
+                      ]
+                    }
                   ]
                 }
               ]
@@ -2374,19 +2448,6 @@
                 },
                 {
                   "type": {
-                    "value": "CreateByName"
-                  },
-                  "parameters": [
-                    "",
-                    "CardPreviewGroup",
-                    "CardSlotGroup.PreviewObjectName()",
-                    "CursorX()",
-                    "CursorY()",
-                    "\"UI\""
-                  ]
-                },
-                {
-                  "type": {
                     "value": "SetBooleanVariable"
                   },
                   "parameters": [
@@ -2402,7 +2463,7 @@
                   "parameters": [
                     "PickingCard.ObjectName",
                     "=",
-                    "CardPreviewGroup.PlantName()"
+                    "CardSlotGroup.PlantName()"
                   ]
                 },
                 {
@@ -2566,7 +2627,6 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
-          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2646,7 +2706,6 @@
           "colorG": 140,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Battle Logic",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3731,7 +3790,7 @@
                     },
                     {
                       "type": {
-                        "value": "SetBooleanVariable"
+                        "value": "SetNumberVariable"
                       },
                       "parameters": [
                         "ShouldShoot",
@@ -3768,7 +3827,7 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "BooleanVariable"
+                        "value": "NumberVariable"
                       },
                       "parameters": [
                         "ShouldShoot",
@@ -3793,7 +3852,7 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "BooleanVariable"
+                        "value": "NumberVariable"
                       },
                       "parameters": [
                         "ShouldShoot",
@@ -3844,7 +3903,7 @@
           "propertyDescriptors": [
             {
               "value": "",
-              "type": "Boolean",
+              "type": "Number",
               "label": "",
               "name": "ShouldShoot"
             }
@@ -5513,26 +5572,30 @@
                         "=",
                         "Price"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"plantname :\"+ PlantName",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"cc222:\"+CardConfig.plantName",
+                        "\"info\"",
+                        ""
+                      ]
                     }
                   ]
                 }
               ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::CardSlot",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Action",
-              "name": "doStepPostEvents",
-              "sentence": "",
-              "events": [],
               "parameters": [
                 {
                   "description": "Object",
@@ -5564,6 +5627,19 @@
                     }
                   ],
                   "actions": [
+                    {
+                      "type": {
+                        "value": "Spawner::PushSpawnRequest"
+                      },
+                      "parameters": [
+                        "",
+                        "PreviewObjectName",
+                        "LayerName",
+                        "CursorX()",
+                        "CursorY()",
+                        ""
+                      ]
+                    },
                     {
                       "type": {
                         "value": "AnimatableCapability::AnimatableBehavior::SetName"
@@ -5631,258 +5707,6 @@
                 }
               ],
               "objectGroups": []
-            },
-            {
-              "description": "Check if canUse.",
-              "fullName": "CanUse",
-              "functionType": "Condition",
-              "group": "CardSlot configuration",
-              "name": "CanUse",
-              "sentence": "_PARAM0_ canUse",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BooleanVariable"
-                      },
-                      "parameters": [
-                        "CanUse",
-                        "True",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetReturnBoolean"
-                      },
-                      "parameters": [
-                        "True"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::CardSlot",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "description": "Change if canUse.",
-              "fullName": "CanUse",
-              "functionType": "Action",
-              "group": "CardSlot configuration",
-              "name": "SetCanUse",
-              "sentence": "_PARAM0_ canUse: _PARAM1_",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BooleanVariable"
-                      },
-                      "parameters": [
-                        "Value",
-                        "False",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetBooleanVariable"
-                      },
-                      "parameters": [
-                        "CanUse",
-                        "False",
-                        ""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BooleanVariable"
-                      },
-                      "parameters": [
-                        "Value",
-                        "True",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetBooleanVariable"
-                      },
-                      "parameters": [
-                        "CanUse",
-                        "True",
-                        ""
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::CardSlot",
-                  "type": "object"
-                },
-                {
-                  "defaultValue": "yes",
-                  "description": "CanUse",
-                  "name": "Value",
-                  "optional": true,
-                  "type": "yesorno"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "description": "the previewObjectName of the object.",
-              "fullName": "PreviewObjectName",
-              "functionType": "ExpressionAndCondition",
-              "group": "CardSlot configuration",
-              "name": "PreviewObjectName",
-              "sentence": "the previewObjectName",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetReturnString"
-                      },
-                      "parameters": [
-                        "PreviewObjectName"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "expressionType": {
-                "type": "string"
-              },
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::CardSlot",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "ActionWithOperator",
-              "getterName": "PreviewObjectName",
-              "group": "CardSlot configuration",
-              "name": "SetPreviewObjectName",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetStringVariable"
-                      },
-                      "parameters": [
-                        "PreviewObjectName",
-                        "=",
-                        "Value"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [],
-              "objectGroups": []
-            },
-            {
-              "description": "the price of the object.",
-              "fullName": "Price",
-              "functionType": "ExpressionAndCondition",
-              "group": "CardSlot configuration",
-              "name": "Price",
-              "sentence": "the price",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetReturnNumber"
-                      },
-                      "parameters": [
-                        "Price"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "expressionType": {
-                "type": "expression"
-              },
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::CardSlot",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "ActionWithOperator",
-              "getterName": "Price",
-              "group": "CardSlot configuration",
-              "name": "SetPrice",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetNumberVariable"
-                      },
-                      "parameters": [
-                        "Price",
-                        "=",
-                        "Value"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [],
-              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -5892,33 +5716,7 @@
                 "functionName": "onCreated"
               },
               {
-                "functionName": "doStepPostEvents"
-              },
-              {
                 "functionName": "PerformClick"
-              },
-              {
-                "folderName": "CardSlot configuration",
-                "children": [
-                  {
-                    "functionName": "CanUse"
-                  },
-                  {
-                    "functionName": "SetCanUse"
-                  },
-                  {
-                    "functionName": "PreviewObjectName"
-                  },
-                  {
-                    "functionName": "SetPreviewObjectName"
-                  },
-                  {
-                    "functionName": "Price"
-                  },
-                  {
-                    "functionName": "SetPrice"
-                  }
-                ]
               }
             ]
           },
@@ -5947,11 +5745,38 @@
               "type": "Boolean",
               "label": "",
               "name": "CanUse"
+            },
+            {
+              "value": "",
+              "type": "String",
+              "label": "",
+              "name": "PlantName"
+            },
+            {
+              "value": "",
+              "type": "String",
+              "label": "",
+              "name": "LayerName"
+            },
+            {
+              "value": " {       \"price\": 100,       \"previewObjectName\": \"PeaShooterCardPreview\",       \"plantName\": \"PeaShooter\"     }",
+              "type": "JsonObject",
+              "label": "cards placeholder",
+              "name": "CardConfig"
             }
           ],
           "propertiesFolderStructure": {
             "folderName": "__ROOT",
             "children": [
+              {
+                "propertyName": "CardConfig"
+              },
+              {
+                "propertyName": "LayerName"
+              },
+              {
+                "propertyName": "PlantName"
+              },
               {
                 "propertyName": "CanUse"
               },
@@ -15608,16 +15433,6 @@
                         "value": "SetStringVariable"
                       },
                       "parameters": [
-                        "Data.GroupName",
-                        "=",
-                        "groupName"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetStringVariable"
-                      },
-                      "parameters": [
                         "Data.ObjName",
                         "=",
                         "objectName"
@@ -15716,11 +15531,6 @@
               "description": "",
               "name": "posY",
               "type": "expression"
-            },
-            {
-              "description": "",
-              "name": "groupName",
-              "type": "string"
             }
           ],
           "objectGroups": []
