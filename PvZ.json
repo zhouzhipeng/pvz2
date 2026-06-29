@@ -1599,7 +1599,8 @@
         "PreviewObjectName": "PeaShooterCardPreview",
         "PreviewGroupName": "CardPreviewGroup",
         "LayerName": "Spawnable",
-        "PlantName": "{{cards.PeaShooter.name}}"
+        "PlantName": "{{cards.PeaShooter.name}}",
+        "CardConfig": "{{cards.PeaShooter}}"
       }
     },
     {
@@ -1727,11 +1728,13 @@
         {
           "isInheritedFromObjectType": true,
           "name": "ShooterPlants",
-          "type": "pvz::ShooterPlants"
+          "type": "pvz::ShooterPlants",
+          "ShouldShoot": 0
         }
       ],
       "content": {
-        "PeaBulletName": "PeaBullet"
+        "PeaBulletName": "PeaBullet",
+        "BulletConfig": "{{bullets.peashooter}}"
       }
     },
     {
@@ -2005,7 +2008,13 @@
         "previewLayerName": "Spawnable"
       }
     },
-    "people": {}
+    "bullets": {
+      "peashooter": {
+        "prefabName": "PeaBullet",
+        "speed": 100,
+        "layer": "Spawnable"
+      }
+    }
   },
   "layouts": [
     {
@@ -2030,7 +2039,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.45076158913273007,
+        "zoomFactor": 0.497915990791233,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2323,59 +2332,6 @@
                     "=",
                     "1"
                   ]
-                },
-                {
-                  "type": {
-                    "value": "DebuggerTools::ConsoleLog"
-                  },
-                  "parameters": [
-                    "\"config :\"+ConfigString(\"{{cards.Sunflower.price}}\")",
-                    "\"info\"",
-                    ""
-                  ]
-                }
-              ],
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "GlobalConfigBoolean"
-                      },
-                      "parameters": [
-                        "{{cards.PeaShooter.canUse}}",
-                        "True"
-                      ]
-                    }
-                  ],
-                  "actions": []
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "GlobalConfigBoolean"
-                      },
-                      "parameters": [
-                        "{{cards.Sunflower.canUse}}",
-                        "True"
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "ConfigToJSON(\"{{cards.PeaShooter}}\")",
-                        "",
-                        ""
-                      ]
-                    }
-                  ]
                 }
               ]
             }
@@ -2431,7 +2387,7 @@
                   "parameters": [
                     "SunCountBoard",
                     ">=",
-                    "CardSlotGroup.Price()",
+                    "CardSlotGroup.GetPrice()",
                     ""
                   ]
                 }
@@ -2463,7 +2419,7 @@
                   "parameters": [
                     "PickingCard.ObjectName",
                     "=",
-                    "CardSlotGroup.PlantName()"
+                    "CardSlotGroup.GetPlantName()"
                   ]
                 },
                 {
@@ -2473,7 +2429,7 @@
                   "parameters": [
                     "PickingCard.Price",
                     "=",
-                    "CardSlotGroup.Price()"
+                    "CardSlotGroup.GetPrice()"
                   ]
                 }
               ]
@@ -3510,6 +3466,7 @@
                   ]
                 },
                 {
+                  "disabled": true,
                   "type": {
                     "value": "DebuggerTools::ConsoleLog"
                   },
@@ -3619,6 +3576,7 @@
                       ]
                     },
                     {
+                      "disabled": true,
                       "type": {
                         "value": "DebuggerTools::ConsoleLog"
                       },
@@ -3759,164 +3717,6 @@
         "folderName": "__ROOT"
       },
       "eventsBasedBehaviors": [
-        {
-          "description": "",
-          "fullName": "ShooterPlants",
-          "helpPath": "",
-          "iconUrl": "",
-          "name": "ShooterPlants",
-          "objectType": "",
-          "previewIconUrl": "",
-          "eventsFunctions": [
-            {
-              "fullName": "",
-              "functionType": "Action",
-              "name": "Shoot",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"shoot...\"",
-                        "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetNumberVariable"
-                      },
-                      "parameters": [
-                        "ShouldShoot",
-                        "True",
-                        ""
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "type": "object"
-                },
-                {
-                  "description": "Behavior",
-                  "name": "Behavior",
-                  "supplementaryInformation": "pvz::ShooterPlants",
-                  "type": "behavior"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Condition",
-              "name": "HasShootSignal",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "NumberVariable"
-                      },
-                      "parameters": [
-                        "ShouldShoot",
-                        "True",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetReturnBoolean"
-                      },
-                      "parameters": [
-                        "True"
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "NumberVariable"
-                      },
-                      "parameters": [
-                        "ShouldShoot",
-                        "False",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetReturnBoolean"
-                      },
-                      "parameters": [
-                        "False"
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "type": "object"
-                },
-                {
-                  "description": "Behavior",
-                  "name": "Behavior",
-                  "supplementaryInformation": "pvz::ShooterPlants",
-                  "type": "behavior"
-                }
-              ],
-              "objectGroups": []
-            }
-          ],
-          "eventsFunctionsFolderStructure": {
-            "folderName": "__ROOT",
-            "children": [
-              {
-                "functionName": "Shoot"
-              },
-              {
-                "functionName": "HasShootSignal"
-              }
-            ]
-          },
-          "propertyDescriptors": [
-            {
-              "value": "",
-              "type": "Number",
-              "label": "",
-              "name": "ShouldShoot"
-            }
-          ],
-          "propertiesFolderStructure": {
-            "folderName": "__ROOT",
-            "children": [
-              {
-                "propertyName": "ShouldShoot"
-              }
-            ]
-          }
-        },
         {
           "description": "",
           "fullName": "BulletHit",
@@ -4667,7 +4467,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 2.6044573427093844,
+            "zoomFactor": 2.3578060402569427,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -5545,7 +5345,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 3.7276913496462254,
+            "zoomFactor": 3.3746658224266244,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -5570,27 +5370,7 @@
                         "PriceLabel",
                         "Text",
                         "=",
-                        "Price"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"plantname :\"+ PlantName",
-                        "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"cc222:\"+CardConfig.plantName",
-                        "\"info\"",
-                        ""
+                        "CardConfig.price"
                       ]
                     }
                   ]
@@ -5633,8 +5413,8 @@
                       },
                       "parameters": [
                         "",
-                        "PreviewObjectName",
-                        "LayerName",
+                        "CardConfig.previewObjectName",
+                        "CardConfig.previewLayerName",
                         "CursorX()",
                         "CursorY()",
                         ""
@@ -5707,6 +5487,198 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "description": "Check if canUse.",
+              "fullName": "CanUse",
+              "functionType": "Condition",
+              "group": "CardSlot configuration",
+              "name": "CanUse",
+              "sentence": "_PARAM0_ canUse",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "CanUse",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "description": "Change if canUse.",
+              "fullName": "CanUse",
+              "functionType": "Action",
+              "group": "CardSlot configuration",
+              "name": "SetCanUse",
+              "sentence": "_PARAM0_ canUse: _PARAM1_",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Value",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "CanUse",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Value",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "CanUse",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                },
+                {
+                  "defaultValue": "yes",
+                  "description": "CanUse",
+                  "name": "Value",
+                  "optional": true,
+                  "type": "yesorno"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Expression",
+              "name": "GetPrice",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "CardConfig.price"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "StringExpression",
+              "name": "GetPlantName",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnString"
+                      },
+                      "parameters": [
+                        "CardConfig.plantName"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "string"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::CardSlot",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -5716,30 +5688,28 @@
                 "functionName": "onCreated"
               },
               {
+                "functionName": "GetPrice"
+              },
+              {
+                "functionName": "GetPlantName"
+              },
+              {
                 "functionName": "PerformClick"
+              },
+              {
+                "folderName": "CardSlot configuration",
+                "children": [
+                  {
+                    "functionName": "CanUse"
+                  },
+                  {
+                    "functionName": "SetCanUse"
+                  }
+                ]
               }
             ]
           },
           "propertyDescriptors": [
-            {
-              "value": "",
-              "type": "Number",
-              "label": "",
-              "name": "Price"
-            },
-            {
-              "value": "",
-              "type": "String",
-              "label": "",
-              "name": "PreviewObjectName"
-            },
-            {
-              "value": "3",
-              "type": "Number",
-              "unit": "Second",
-              "label": "",
-              "name": "CDTime"
-            },
             {
               "value": "true",
               "type": "Boolean",
@@ -5747,19 +5717,7 @@
               "name": "CanUse"
             },
             {
-              "value": "",
-              "type": "String",
-              "label": "",
-              "name": "PlantName"
-            },
-            {
-              "value": "",
-              "type": "String",
-              "label": "",
-              "name": "LayerName"
-            },
-            {
-              "value": " {       \"price\": 100,       \"previewObjectName\": \"PeaShooterCardPreview\",       \"plantName\": \"PeaShooter\"     }",
+              "value": "{       \"price\": 100,       \"previewObjectName\": \"PeaShooterCardPreview\",       \"plantName\": \"PeaShooter\",       \"previewLayerName\": \"Spawnable\"     }",
               "type": "JsonObject",
               "label": "cards placeholder",
               "name": "CardConfig"
@@ -5772,22 +5730,7 @@
                 "propertyName": "CardConfig"
               },
               {
-                "propertyName": "LayerName"
-              },
-              {
-                "propertyName": "PlantName"
-              },
-              {
                 "propertyName": "CanUse"
-              },
-              {
-                "propertyName": "CDTime"
-              },
-              {
-                "propertyName": "PreviewObjectName"
-              },
-              {
-                "propertyName": "Price"
               }
             ]
           },
@@ -6006,7 +5949,7 @@
                 "gridColor": 10401023,
                 "gridAlpha": 0.8,
                 "snap": false,
-                "zoomFactor": 2.675527197226908,
+                "zoomFactor": 2.7657468574560555,
                 "windowMask": false,
                 "selectedLayer": "",
                 "gameEditorMode": "instances-editor"
@@ -8649,7 +8592,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 3.4261869022483724,
+            "zoomFactor": 3.3144234495053673,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -8700,16 +8643,6 @@
                         "3",
                         ""
                       ]
-                    },
-                    {
-                      "type": {
-                        "value": "pvz::ShooterPlants::HasShootSignal"
-                      },
-                      "parameters": [
-                        "Object",
-                        "ShooterPlants",
-                        ""
-                      ]
                     }
                   ],
                   "actions": [
@@ -8719,10 +8652,10 @@
                       },
                       "parameters": [
                         "",
-                        "PeaBulletName",
+                        "BulletConfig.prefabName",
+                        "BulletConfig.layer",
                         "Object.X()+NewSprite.PointX(\"ShootPoint\")",
                         "Object.Y()+NewSprite.PointY(\"ShootPoint\")",
-                        "\"\"",
                         ""
                       ]
                     },
@@ -8766,25 +8699,25 @@
           "propertyDescriptors": [
             {
               "value": "",
-              "type": "String",
-              "label": "",
-              "name": "PeaBulletName"
-            },
-            {
-              "value": "",
               "type": "Boolean",
               "label": "",
               "name": "FindEnemy"
+            },
+            {
+              "value": "{       \"prefabName\": \"PeaBullet\",       \"speed\": 100,       \"layer\": \"Spawnable\"     }",
+              "type": "JsonObject",
+              "label": "",
+              "name": "BulletConfig"
             }
           ],
           "propertiesFolderStructure": {
             "folderName": "__ROOT",
             "children": [
               {
-                "propertyName": "FindEnemy"
+                "propertyName": "BulletConfig"
               },
               {
-                "propertyName": "PeaBulletName"
+                "propertyName": "FindEnemy"
               }
             ]
           },
