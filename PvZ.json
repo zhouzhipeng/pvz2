@@ -2278,7 +2278,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.7412978919222374,
+        "zoomFactor": 0.60753936031167,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2444,7 +2444,7 @@
           "content": {}
         },
         {
-          "adaptCollisionMaskAutomatically": true,
+          "adaptCollisionMaskAutomatically": false,
           "assetStoreId": "",
           "name": "background1",
           "persistentUuid": "2d6827a0-47db-434b-882a-2278c71b12c8",
@@ -2463,7 +2463,7 @@
                   "timeBetweenFrames": 0.08,
                   "sprites": [
                     {
-                      "hasCustomCollisionMask": true,
+                      "hasCustomCollisionMask": false,
                       "image": "assets/background1.jpg",
                       "points": [],
                       "originPoint": {
@@ -3858,6 +3858,14 @@
                         "ToString(GroundSlot.IsOccupied())",
                         "",
                         ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "Hide"
+                      },
+                      "parameters": [
+                        "GroundSlot"
                       ]
                     }
                   ],
@@ -15119,7 +15127,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 1.3095508913925924,
+            "zoomFactor": 1.3537093797072217,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"

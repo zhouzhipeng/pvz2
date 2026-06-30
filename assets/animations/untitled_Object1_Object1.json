@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "name": "untitled_Object1_Object1_Object1",
+  "duration": 2,
+  "loop": true,
+  "tracks": {
+    "x": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": 0,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 0.21,
+          "value": -228.23,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.11,
+          "value": 234,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.91,
+          "value": 2
+        }
+      ]
+    },
+    "y": {
+      "keyframes": [
+        {
+          "time": 0.21,
+          "value": 168,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.11,
+          "value": 12,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.91,
+          "value": 4
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "name": "fly_Object1",
+  "duration": 3,
+  "loop": true,
+  "tracks": {
+    "x": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": 0,
+          "easing": {
+            "type": "cubicBezier",
+            "controlPoints": [
+              0.42,
+              0,
+              0.58,
+              1
+            ]
+          }
+        },
+        {
+          "time": 3,
+          "value": 300
+        }
+      ]
+    },
+    "y": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": 0,
+          "easing": {
+            "type": "cubicBezier",
+            "controlPoints": [
+              0.42,
+              0,
+              0.58,
+              1
+            ]
+          }
+        },
+        {
+          "time": 1.5,
+          "value": -30,
+          "easing": {
+            "type": "cubicBezier",
+            "controlPoints": [
+              0.42,
+              0,
+              0.58,
+              1
+            ]
+          }
+        },
+        {
+          "time": 3,
+          "value": 0
+        }
+      ]
+    },
+    "angle": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": -5,
+          "easing": {
+            "type": "cubicBezier",
+            "controlPoints": [
+              0.42,
+              0,
+              0.58,
+              1
+            ]
+          }
+        },
+        {
+          "time": 1.5,
+          "value": 5,
+          "easing": {
+            "type": "cubicBezier",
+            "controlPoints": [
+              0.42,
+              0,
+              0.58,
+              1
+            ]
+          }
+        },
+        {
+          "time": 3,
+          "value": -5
+        }
+      ]
+    },
+    "animationName": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": "fly"
+        }
+      ]
+    }
+  }
+}

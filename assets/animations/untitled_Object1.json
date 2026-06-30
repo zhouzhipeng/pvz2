@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "name": "untitled_Object1",
+  "duration": 2,
+  "loop": true,
+  "tracks": {
+    "x": {
+      "keyframes": [
+        {
+          "time": 0,
+          "value": 0,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.06,
+          "value": 548,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.97,
+          "value": 12
+        }
+      ]
+    },
+    "y": {
+      "keyframes": [
+        {
+          "time": 1.06,
+          "value": 8,
+          "easing": {
+            "type": "linear"
+          }
+        },
+        {
+          "time": 1.97,
+          "value": 6
+        }
+      ]
+    }
+  }
+}
