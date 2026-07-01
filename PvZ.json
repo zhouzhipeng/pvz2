@@ -1818,6 +1818,46 @@
         "name": "assets/ZombieDie_20.png",
         "smoothed": true,
         "userAdded": false
+      },
+      {
+        "file": "assets/bgm1.mp3",
+        "kind": "audio",
+        "metadata": "",
+        "name": "assets/bgm1.mp3",
+        "preloadAsMusic": false,
+        "preloadAsSound": false,
+        "preloadInCache": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/buttonclick.ogg",
+        "kind": "audio",
+        "metadata": "",
+        "name": "assets/buttonclick.ogg",
+        "preloadAsMusic": false,
+        "preloadAsSound": false,
+        "preloadInCache": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/plant1.ogg",
+        "kind": "audio",
+        "metadata": "",
+        "name": "assets/plant1.ogg",
+        "preloadAsMusic": false,
+        "preloadAsSound": false,
+        "preloadInCache": false,
+        "userAdded": false
+      },
+      {
+        "file": "assets/plant2.ogg",
+        "kind": "audio",
+        "metadata": "",
+        "name": "assets/plant2.ogg",
+        "preloadAsMusic": false,
+        "preloadAsSound": false,
+        "preloadInCache": false,
+        "userAdded": false
       }
     ]
   },
@@ -2651,6 +2691,18 @@
                     "=",
                     "1"
                   ]
+                },
+                {
+                  "type": {
+                    "value": "PlayMusic"
+                  },
+                  "parameters": [
+                    "",
+                    "assets/bgm1.mp3",
+                    "",
+                    "",
+                    ""
+                  ]
                 }
               ]
             }
@@ -2750,6 +2802,18 @@
                     "PickingCard.Price",
                     "=",
                     "CardSlotGroup.GetPrice()"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "PlaySound"
+                  },
+                  "parameters": [
+                    "",
+                    "assets/buttonclick.ogg",
+                    "",
+                    "",
+                    ""
                   ]
                 }
               ]
@@ -2890,6 +2954,18 @@
                         "Column",
                         "=",
                         "GroundSlot.Column()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "PlaySound"
+                      },
+                      "parameters": [
+                        "",
+                        "assets/plant2.ogg",
+                        "",
+                        "",
+                        ""
                       ]
                     }
                   ]
@@ -3097,6 +3173,18 @@
                             "IsTargetDead",
                             ""
                           ]
+                        },
+                        {
+                          "type": {
+                            "value": "EmitSignalToPickedObjects"
+                          },
+                          "parameters": [
+                            "",
+                            "PlantsGroup",
+                            "\"Attack\"",
+                            "",
+                            "ZombiesGroup"
+                          ]
                         }
                       ],
                       "events": [
@@ -3145,6 +3233,7 @@
               "colorG": 249,
               "colorR": 171,
               "creationTime": 0,
+              "folded": true,
               "name": "Bullet Hit  Zombies",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3212,8 +3301,29 @@
         },
         {
           "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [],
-          "actions": []
+          "conditions": [
+            {
+              "type": {
+                "value": "SignalReceived"
+              },
+              "parameters": [
+                "",
+                "\"aaa\""
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "value": "DebuggerTools::ConsoleLog"
+              },
+              "parameters": [
+                "\"scene sginal re:\"+ SignalSenderObjectName()",
+                "",
+                ""
+              ]
+            }
+          ]
         }
       ],
       "layers": [
@@ -8511,7 +8621,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 3.000535851005113,
+            "zoomFactor": 4.044141460720381,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -8561,17 +8671,6 @@
                       "parameters": [
                         "\"x=\"+ToString(Object.X()+NewSprite.PointX(\"SunSpawnPoint\"))",
                         "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "pvz::CanTakeDamage::SetMaxHealth"
-                      },
-                      "parameters": [
-                        "Object",
-                        "CanTakeDamage",
-                        "HealthBar.",
                         ""
                       ]
                     }
@@ -8668,6 +8767,81 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onSignal",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"Attack\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"attacker : \"+ EmitterObjectName  +\", instance : \"+ EmitterInstanceId",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSceneSignal"
+                      },
+                      "parameters": [
+                        "",
+                        "\"aaa\"",
+                        "",
+                        "Object"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Sunflower",
+                  "type": "object"
+                },
+                {
+                  "description": "Signal name",
+                  "name": "SignalName",
+                  "type": "signalName"
+                },
+                {
+                  "description": "Payload",
+                  "name": "Payload",
+                  "type": "variable"
+                },
+                {
+                  "description": "Emitter object name",
+                  "name": "EmitterObjectName",
+                  "type": "string"
+                },
+                {
+                  "description": "Emitter instance id",
+                  "name": "EmitterInstanceId",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -8677,13 +8851,28 @@
                 "functionName": "onPlacedInScene"
               },
               {
+                "functionName": "onSignal"
+              },
+              {
                 "functionName": "doStepPostEvents"
               }
             ]
           },
-          "propertyDescriptors": [],
+          "propertyDescriptors": [
+            {
+              "value": "",
+              "type": "Number",
+              "label": "",
+              "name": "Property"
+            }
+          ],
           "propertiesFolderStructure": {
-            "folderName": "__ROOT"
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Property"
+              }
+            ]
           },
           "variants": []
         },
