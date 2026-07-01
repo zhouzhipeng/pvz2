@@ -2257,15 +2257,15 @@
   },
   "layouts": [
     {
-      "b": 255,
+      "b": 136,
       "disableInputWhenNotFocused": true,
       "mangledName": "Main",
       "name": "Main",
-      "r": 247,
+      "r": 133,
       "standardSortMethod": true,
       "stopSoundsOnStartup": true,
       "title": "",
-      "v": 249,
+      "v": 134,
       "uiSettings": {
         "grid": false,
         "gridType": "rectangular",
@@ -2278,7 +2278,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.60753936031167,
+        "zoomFactor": 0.8464571843450954,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -7866,6 +7866,17 @@
                   ]
                 }
               ]
+            },
+            {
+              "assetStoreId": "",
+              "name": "HealthBar",
+              "persistentUuid": "64bb2a2c-d8a0-4a0c-8711-faf6c006c8d5",
+              "type": "utils::HealthBar",
+              "variant": "",
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "content": {}
             }
           ],
           "objectsFolderStructure": {
@@ -7873,6 +7884,9 @@
             "children": [
               {
                 "objectName": "NewSprite"
+              },
+              {
+                "objectName": "HealthBar"
               }
             ]
           },
@@ -7924,6 +7938,23 @@
               "numberProperties": [],
               "stringProperties": [],
               "initialVariables": []
+            },
+            {
+              "angle": 0,
+              "customSize": true,
+              "depth": 1,
+              "height": 16,
+              "keepRatio": true,
+              "layer": "",
+              "name": "HealthBar",
+              "persistentUuid": "870147e6-52ec-4520-89cc-1396d1875176",
+              "width": 81,
+              "x": -32,
+              "y": -48,
+              "zOrder": 2,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
             }
           ],
           "editionSettings": {
@@ -7938,7 +7969,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 5.100910946708684,
+            "zoomFactor": 2.807971561206809,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
