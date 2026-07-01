@@ -1924,7 +1924,18 @@
         }
       ],
       "effects": [],
-      "behaviors": [],
+      "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "CanTakeDamage",
+          "type": "pvz::CanTakeDamage",
+          "GotAttack": false,
+          "DamageValue": 0,
+          "AutoReset": true,
+          "MaxHealth": 0,
+          "Property": 0
+        }
+      ],
       "content": {
         "SunGroupName": "Spawnable",
         "SunName": "Sun",
@@ -2060,7 +2071,17 @@
         }
       ],
       "effects": [],
-      "behaviors": [],
+      "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "RepeatTimer",
+          "type": "RepeatEveryXSeconds::RepeatTimer",
+          "TimerName": "MyTimer",
+          "TimerLength": 1,
+          "Limit": -1,
+          "Counter": 0
+        }
+      ],
       "content": {}
     },
     {
@@ -2156,6 +2177,11 @@
       "objects": [
         {
           "name": "Sunflower"
+        }
+      ],
+      "requiredBehaviors": [
+        {
+          "type": "pvz::CanTakeDamage"
         }
       ]
     },
@@ -2278,7 +2304,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.8464571843450954,
+        "zoomFactor": 1.0328169125298383,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2967,6 +2993,7 @@
               "colorG": 151,
               "colorR": 87,
               "creationTime": 0,
+              "folded": true,
               "name": "Check If Can Shoot for Shooter Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3029,22 +3056,83 @@
                         "",
                         ""
                       ]
-                    },
-                    {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::Once"
-                      },
-                      "parameters": []
                     }
                   ],
-                  "actions": [
+                  "actions": [],
+                  "events": [
                     {
-                      "type": {
-                        "value": "pvz::Zombie::EnterAttackMode"
-                      },
-                      "parameters": [
-                        "ZombiesGroup",
-                        "ZombieController"
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "RepeatEveryXSeconds::RepeatTimer::Repeat2"
+                          },
+                          "parameters": [
+                            "ZombiesGroup",
+                            "RepeatTimer",
+                            "\"AttackTimer\"",
+                            "1",
+                            ""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "pvz::Zombie::EnterAttackMode"
+                          },
+                          "parameters": [
+                            "ZombiesGroup",
+                            "ZombieController"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "pvz::CanTakeDamage::TakeDamage"
+                          },
+                          "parameters": [
+                            "PlantsGroup",
+                            "CanTakeDamage",
+                            "10",
+                            "IsTargetDead",
+                            ""
+                          ]
+                        }
+                      ],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "BooleanVariable"
+                              },
+                              "parameters": [
+                                "IsTargetDead",
+                                "True",
+                                ""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "pvz::Zombie::EnterWalkingMode"
+                              },
+                              "parameters": [
+                                "ZombiesGroup",
+                                ""
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "variables": [
+                        {
+                          "name": "IsTargetDead",
+                          "type": "boolean",
+                          "value": false
+                        }
                       ]
                     }
                   ]
@@ -3421,6 +3509,10 @@
           "type": "pvz::BulletHit"
         },
         {
+          "name": "CanTakeDamage",
+          "type": "pvz::CanTakeDamage"
+        },
+        {
           "name": "Effect",
           "type": "EffectCapability::EffectBehavior"
         },
@@ -3631,6 +3723,10 @@
         {
           "name": "BulletHit",
           "type": "pvz::BulletHit"
+        },
+        {
+          "name": "CanTakeDamage",
+          "type": "pvz::CanTakeDamage"
         },
         {
           "name": "Effect",
@@ -4022,7 +4118,18 @@
               "events": [
                 {
                   "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "Hit",
+                        "=",
+                        ""
+                      ]
+                    }
+                  ],
                   "actions": [
                     {
                       "type": {
@@ -4408,6 +4515,441 @@
               }
             ]
           }
+        },
+        {
+          "description": "",
+          "fullName": "CanTakeDamage",
+          "helpPath": "",
+          "iconUrl": "",
+          "name": "CanTakeDamage",
+          "objectType": "",
+          "previewIconUrl": "",
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "TakeDamage",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "DamageValue",
+                        "=",
+                        "Damage"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "GotAttack",
+                        "True",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "MaxHealth",
+                        "-",
+                        "Damage"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberVariable"
+                      },
+                      "parameters": [
+                        "MaxHealth",
+                        "<=",
+                        "0"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "IsDeadV",
+                        "True",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "CopyVariableToArgument2"
+                      },
+                      "parameters": [
+                        "\"IsDead\"",
+                        "IsDeadV"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                },
+                {
+                  "description": "",
+                  "name": "Damage",
+                  "type": "expression"
+                },
+                {
+                  "description": "",
+                  "name": "IsDead",
+                  "type": "variable"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Condition",
+              "name": "HasGotDamage",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BooleanVariable"
+                      },
+                      "parameters": [
+                        "GotAttack",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BooleanVariable"
+                          },
+                          "parameters": [
+                            "AutoReset",
+                            "True",
+                            ""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "pvz::CanTakeDamage::Reset"
+                          },
+                          "parameters": [
+                            "Object",
+                            "Behavior",
+                            ""
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Expression",
+              "name": "Damage",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "DamageValue"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "Reset",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "GotAttack",
+                        "False",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onCreated",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "pvz::CanTakeDamage::Reset"
+                      },
+                      "parameters": [
+                        "Object",
+                        "Behavior",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "SetMaxHealth",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "MaxHealth",
+                        "=",
+                        "Param_MaxHealth"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::CanTakeDamage",
+                  "type": "behavior"
+                },
+                {
+                  "description": "",
+                  "name": "Param_MaxHealth",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "onCreated"
+              },
+              {
+                "functionName": "TakeDamage"
+              },
+              {
+                "functionName": "SetMaxHealth"
+              },
+              {
+                "functionName": "Damage"
+              },
+              {
+                "functionName": "HasGotDamage"
+              },
+              {
+                "functionName": "Reset"
+              }
+            ]
+          },
+          "propertyDescriptors": [
+            {
+              "value": "true",
+              "type": "Boolean",
+              "label": "",
+              "name": "AutoReset"
+            },
+            {
+              "value": "",
+              "type": "Number",
+              "label": "",
+              "name": "Property"
+            }
+          ],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "Property"
+              },
+              {
+                "propertyName": "AutoReset"
+              }
+            ]
+          },
+          "sharedPropertyDescriptors": [
+            {
+              "value": "",
+              "type": "Number",
+              "label": "",
+              "name": "SceneA"
+            }
+          ],
+          "sharedPropertiesFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "propertyName": "SceneA"
+              }
+            ]
+          },
+          "variables": [
+            {
+              "name": "DamageValue",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "GotAttack",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "MaxHealth",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "IsDeadV",
+              "type": "boolean",
+              "value": false
+            }
+          ]
         }
       ],
       "eventsBasedObjects": [
@@ -6915,7 +7457,7 @@
                 "gridColor": 10401023,
                 "gridAlpha": 0.8,
                 "snap": false,
-                "zoomFactor": 1.495321614109031,
+                "zoomFactor": 2.4591242621570895,
                 "windowMask": false,
                 "selectedLayer": "",
                 "gameEditorMode": "instances-editor"
@@ -7969,12 +8511,21 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 2.807971561206809,
+            "zoomFactor": 3.000535851005113,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
           },
-          "behaviors": [],
+          "behaviors": [
+            {
+              "name": "CanTakeDamage",
+              "type": "pvz::CanTakeDamage",
+              "GotAttack": false,
+              "DamageValue": 0,
+              "AutoReset": true,
+              "Property": ""
+            }
+          ],
           "variables": [],
           "eventsFunctions": [
             {
@@ -8005,24 +8556,104 @@
                   "actions": [
                     {
                       "type": {
-                        "value": "pvz::SpawnController::UpdateSpawnPosition"
-                      },
-                      "parameters": [
-                        "Object",
-                        "SpawnController",
-                        "Object.X()+NewSprite.PointX(\"SunSpawnPoint\")",
-                        "Object.Y()+NewSprite.PointY(\"SunSpawnPoint\")",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
                         "value": "DebuggerTools::ConsoleLog"
                       },
                       "parameters": [
                         "\"x=\"+ToString(Object.X()+NewSprite.PointX(\"SunSpawnPoint\"))",
                         "",
                         ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::CanTakeDamage::SetMaxHealth"
+                      },
+                      "parameters": [
+                        "Object",
+                        "CanTakeDamage",
+                        "HealthBar.",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Sunflower",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "doStepPostEvents",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "pvz::CanTakeDamage::HasGotDamage"
+                      },
+                      "parameters": [
+                        "Object",
+                        "CanTakeDamage",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"sunflower got damage:\"+ ToString(Object.CanTakeDamage::Damage())",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "utils::HealthBar::TakeDamage"
+                      },
+                      "parameters": [
+                        "HealthBar",
+                        "Object.CanTakeDamage::Damage()",
+                        ""
+                      ]
+                    }
+                  ],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "utils::HealthBar::IsDead"
+                          },
+                          "parameters": [
+                            "HealthBar",
+                            ""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "Delete"
+                          },
+                          "parameters": [
+                            "Object",
+                            ""
+                          ]
+                        }
                       ]
                     }
                   ]
@@ -8044,6 +8675,9 @@
             "children": [
               {
                 "functionName": "onPlacedInScene"
+              },
+              {
+                "functionName": "doStepPostEvents"
               }
             ]
           },
@@ -15163,7 +15797,16 @@
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
           },
-          "behaviors": [],
+          "behaviors": [
+            {
+              "name": "RepeatTimer",
+              "type": "RepeatEveryXSeconds::RepeatTimer",
+              "TimerName": "MyTimer",
+              "TimerLength": 1,
+              "Limit": -1,
+              "Counter": 0
+            }
+          ],
           "variables": [
             {
               "name": "State",
@@ -15498,6 +16141,39 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "EnterWalkingMode",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "State",
+                        "=",
+                        "\"Walking\""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Zombie",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -15511,6 +16187,9 @@
               },
               {
                 "functionName": "EnterAttackMode"
+              },
+              {
+                "functionName": "EnterWalkingMode"
               },
               {
                 "functionName": "TakeDamage"
@@ -15925,7 +16604,13 @@
             "gameEditorMode": "instances-editor"
           },
           "behaviors": [],
-          "variables": [],
+          "variables": [
+            {
+              "name": "CurrentHealth",
+              "type": "number",
+              "value": 0
+            }
+          ],
           "eventsFunctions": [
             {
               "description": "the currentHealth of the object.",
@@ -16092,6 +16777,48 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Condition",
+              "name": "IsDead",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "NumberVariable"
+                      },
+                      "parameters": [
+                        "CurrentHealth",
+                        "<=",
+                        "0"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnBoolean"
+                      },
+                      "parameters": [
+                        "True"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "utils::HealthBar",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -16099,6 +16826,9 @@
             "children": [
               {
                 "functionName": "TakeDamage"
+              },
+              {
+                "functionName": "IsDead"
               },
               {
                 "functionName": "onCreated"
@@ -16121,13 +16851,6 @@
               "name": "MaxHealth"
             },
             {
-              "value": "",
-              "type": "Number",
-              "label": "",
-              "hidden": true,
-              "name": "CurrentHealth"
-            },
-            {
               "value": "false",
               "type": "Boolean",
               "label": "",
@@ -16139,9 +16862,6 @@
             "children": [
               {
                 "propertyName": "HideUI"
-              },
-              {
-                "propertyName": "CurrentHealth"
               },
               {
                 "propertyName": "MaxHealth"
