@@ -3069,7 +3069,6 @@
               "colorG": 151,
               "colorR": 87,
               "creationTime": 0,
-              "folded": true,
               "name": "Check If Can Shoot for Shooter Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3318,7 +3317,7 @@
                 "value": "DebuggerTools::ConsoleLog"
               },
               "parameters": [
-                "\"scene sginal re:\"+ SignalSenderObjectName()",
+                "\"scene sginal re:\"+ SignalSenderObjectName()+\", payload:\"+SignalPayloadString()",
                 "",
                 ""
               ]
@@ -8806,8 +8805,34 @@
                       "parameters": [
                         "",
                         "\"aaa\"",
-                        "",
+                        "\"test\"",
                         "Object"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSignalToBehavior"
+                      },
+                      "parameters": [
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSignalToObjectInstance"
+                      },
+                      "parameters": [
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        ""
                       ]
                     }
                   ]
