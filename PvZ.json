@@ -1,9 +1,9 @@
 {
   "firstLayout": "Main",
   "gdVersion": {
-    "build": 269,
-    "major": 5,
-    "minor": 6,
+    "build": 0,
+    "major": 6,
+    "minor": 0,
     "revision": 0
   },
   "initialGDVersion": "5.6.269",
@@ -2344,7 +2344,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 1.0328169125298383,
+        "zoomFactor": 0.9350055057185505,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
