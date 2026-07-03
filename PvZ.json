@@ -25,7 +25,7 @@
     "author": "",
     "windowWidth": 900,
     "windowHeight": 600,
-    "latestCompilationDirectory": "",
+    "latestCompilationDirectory": "D:\\download\\exporthtml",
     "maxFPS": 60,
     "minFPS": 20,
     "verticalSync": false,
@@ -1858,6 +1858,14 @@
         "preloadAsSound": false,
         "preloadInCache": false,
         "userAdded": false
+      },
+      {
+        "file": "assets/NewSprite2.png",
+        "kind": "image",
+        "metadata": "{\"extension\":\".png\"}",
+        "name": "NewSprite2",
+        "smoothed": true,
+        "userAdded": false
       }
     ]
   },
@@ -1941,28 +1949,7 @@
       "persistentUuid": "1eda0896-c8e9-4d5f-8ce1-a3dd2fd4d9ea",
       "type": "pvz::Sunflower",
       "variant": "",
-      "variables": [
-        {
-          "name": "Column",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "Row",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "MaxHealth",
-          "type": "number",
-          "value": 100
-        },
-        {
-          "name": "CurrentHealth",
-          "type": "number",
-          "value": 0
-        }
-      ],
+      "variables": [],
       "effects": [],
       "behaviors": [
         {
@@ -1974,6 +1961,11 @@
           "AutoReset": true,
           "MaxHealth": 0,
           "Property": 0
+        },
+        {
+          "isInheritedFromObjectType": true,
+          "name": "GridInfo",
+          "type": "pvz::GridInfo"
         }
       ],
       "content": {
@@ -1987,30 +1979,14 @@
       "name": "PeaShooter",
       "type": "pvz::PeaShooter",
       "variant": "",
-      "variables": [
-        {
-          "name": "Column",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "Row",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "MaxHealth",
-          "type": "number",
-          "value": 100
-        },
-        {
-          "name": "CurrentHealth",
-          "type": "number",
-          "value": 0
-        }
-      ],
+      "variables": [],
       "effects": [],
       "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "GridInfo",
+          "type": "pvz::GridInfo"
+        },
         {
           "isInheritedFromObjectType": true,
           "name": "RepeatTimer",
@@ -2088,30 +2064,14 @@
       "persistentUuid": "85686fa2-3590-4723-a925-7f2e4d90d840",
       "type": "pvz::Zombie",
       "variant": "",
-      "variables": [
-        {
-          "name": "Row",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "MaxHealth",
-          "type": "number",
-          "value": 100
-        },
-        {
-          "name": "CurrentHealth",
-          "type": "number",
-          "value": 0
-        },
-        {
-          "name": "AttackPower",
-          "type": "number",
-          "value": 10
-        }
-      ],
+      "variables": [],
       "effects": [],
       "behaviors": [
+        {
+          "isInheritedFromObjectType": true,
+          "name": "GridInfo",
+          "type": "pvz::GridInfo"
+        },
         {
           "isInheritedFromObjectType": true,
           "name": "RepeatTimer",
@@ -2217,11 +2177,9 @@
       "objects": [
         {
           "name": "Sunflower"
-        }
-      ],
-      "requiredBehaviors": [
+        },
         {
-          "type": "pvz::CanTakeDamage"
+          "name": "PeaShooter"
         }
       ]
     },
@@ -2344,7 +2302,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 1.067643839732798,
+        "zoomFactor": 0.9045052888202113,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2479,12 +2437,127 @@
           "name": "Zombie",
           "persistentUuid": "6aafd6ea-d02d-44a7-9eb3-e61c064374d3",
           "width": 0,
-          "x": 745,
-          "y": 126,
+          "x": 847,
+          "y": 112,
           "zOrder": 9,
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 55,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "EnemyDetector",
+          "persistentUuid": "e8128e0c-800b-4073-a845-08d9260cabc9",
+          "width": 19,
+          "x": 788,
+          "y": 506,
+          "zOrder": 10,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 55,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "EnemyDetector",
+          "persistentUuid": "44818828-c87c-4439-bc37-5e8a8f922b20",
+          "width": 19,
+          "x": 787,
+          "y": 101,
+          "zOrder": 10,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 55,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "EnemyDetector",
+          "persistentUuid": "ef4c7697-d803-4edc-8b54-afcdaf799657",
+          "width": 19,
+          "x": 787,
+          "y": 202,
+          "zOrder": 10,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 55,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "EnemyDetector",
+          "persistentUuid": "7013701e-14f0-450b-96f8-a1c50df8bf29",
+          "width": 19,
+          "x": 790,
+          "y": 310,
+          "zOrder": 10,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "depth": 1,
+          "height": 55,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "EnemyDetector",
+          "persistentUuid": "9de41299-66e5-422a-aa1d-aafc08b4537f",
+          "width": 19,
+          "x": 794,
+          "y": 402,
+          "zOrder": 10,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 4
+            }
+          ]
         }
       ],
       "objects": [
@@ -2569,6 +2642,74 @@
             "HoveredFadeOutDuration": 0.25,
             "LabelText": "{{i18n[\"button1.label\"].key_$locale}}"
           }
+        },
+        {
+          "adaptCollisionMaskAutomatically": true,
+          "assetStoreId": "",
+          "name": "EnemyDetector",
+          "persistentUuid": "e0d663b5-131b-491b-9651-40047e937795",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 0
+            }
+          ],
+          "effects": [],
+          "behaviors": [],
+          "animations": [
+            {
+              "name": "NewSprite",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "metadata": "{\"pskl\":{}}",
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": true,
+                      "image": "NewSprite2",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": [
+                        [
+                          {
+                            "x": 0,
+                            "y": 0
+                          },
+                          {
+                            "x": 64,
+                            "y": 0
+                          },
+                          {
+                            "x": 64,
+                            "y": 64
+                          },
+                          {
+                            "x": 0,
+                            "y": 64
+                          }
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "objectsFolderStructure": {
@@ -2585,6 +2726,9 @@
           },
           {
             "objectName": "BlackDecoratedButton"
+          },
+          {
+            "objectName": "EnemyDetector"
           }
         ]
       },
@@ -2652,7 +2796,6 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
-          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2683,17 +2826,6 @@
                 },
                 {
                   "type": {
-                    "value": "SetNumberObjectVariable"
-                  },
-                  "parameters": [
-                    "Zombie",
-                    "Row",
-                    "=",
-                    "1"
-                  ]
-                },
-                {
-                  "type": {
                     "value": "PlayMusic"
                   },
                   "parameters": [
@@ -2701,6 +2833,17 @@
                     "assets/bgm1.mp3",
                     "",
                     "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "pvz::GridInfo::SetRow"
+                  },
+                  "parameters": [
+                    "Zombie",
+                    "GridInfo",
+                    "1",
                     ""
                   ]
                 }
@@ -2714,7 +2857,6 @@
           "colorG": 134,
           "colorR": 110,
           "creationTime": 0,
-          "folded": true,
           "name": "Card Slots Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2826,7 +2968,6 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2936,28 +3077,6 @@
                     },
                     {
                       "type": {
-                        "value": "SetNumberObjectVariable"
-                      },
-                      "parameters": [
-                        "PlantsGroup",
-                        "Row",
-                        "=",
-                        "GroundSlot.Row()"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetNumberObjectVariable"
-                      },
-                      "parameters": [
-                        "PlantsGroup",
-                        "Column",
-                        "=",
-                        "GroundSlot.Column()"
-                      ]
-                    },
-                    {
-                      "type": {
                         "value": "PlaySound"
                       },
                       "parameters": [
@@ -2965,6 +3084,18 @@
                         "assets/plant2.ogg",
                         "",
                         "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "pvz::GridInfo::SetRowAndColumn"
+                      },
+                      "parameters": [
+                        "PlantsGroup",
+                        "GridInfo",
+                        "GroundSlot.Row()",
+                        "GroundSlot.Column()",
                         ""
                       ]
                     }
@@ -2980,7 +3111,6 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
-          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3060,7 +3190,6 @@
           "colorG": 140,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Battle Logic",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3075,34 +3204,39 @@
               "type": "BuiltinCommonInstructions::Group",
               "events": [
                 {
-                  "type": "BuiltinCommonInstructions::ForEach",
-                  "object": "ZombiesGroup",
-                  "conditions": [],
-                  "actions": [],
-                  "events": [
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
                     {
-                      "type": "BuiltinCommonInstructions::ForEach",
-                      "object": "ShooterPlantsGroup",
-                      "conditions": [
-                        {
-                          "type": {
-                            "value": "NumberObjectVariable"
-                          },
-                          "parameters": [
-                            "ShooterPlantsGroup",
-                            "Row",
-                            "=",
-                            "ZombiesGroup.Row"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "BuiltinCommonInstructions::Once"
-                          },
-                          "parameters": []
-                        }
-                      ],
-                      "actions": []
+                      "type": {
+                        "value": "CollisionNP"
+                      },
+                      "parameters": [
+                        "EnemyDetector",
+                        "ZombiesGroup",
+                        "",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::Once"
+                      },
+                      "parameters": []
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "EmitSignalToObjectGroup"
+                      },
+                      "parameters": [
+                        "",
+                        "\"ShooterPlantsGroup\"",
+                        "\"EnemyCome\"",
+                        "EnemyDetector.Row",
+                        "ZombiesGroup"
+                      ]
                     }
                   ]
                 }
@@ -3233,7 +3367,6 @@
               "colorG": 249,
               "colorR": 171,
               "creationTime": 0,
-              "folded": true,
               "name": "Bullet Hit  Zombies",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3298,32 +3431,6 @@
             }
           ],
           "parameters": []
-        },
-        {
-          "type": "BuiltinCommonInstructions::Standard",
-          "conditions": [
-            {
-              "type": {
-                "value": "SignalReceived"
-              },
-              "parameters": [
-                "",
-                "\"spawn\""
-              ]
-            }
-          ],
-          "actions": [
-            {
-              "type": {
-                "value": "DebuggerTools::ConsoleLog"
-              },
-              "parameters": [
-                "\"scene sginal re:\"+ SignalSenderObjectName()+\", payload:\"+SignalPayload()",
-                "\"info\"",
-                ""
-              ]
-            }
-          ]
         }
       ],
       "layers": [
@@ -3635,6 +3742,10 @@
           "type": "utils::FollowMouseCursor"
         },
         {
+          "name": "GridInfo",
+          "type": "pvz::GridInfo"
+        },
+        {
           "name": "Opacity",
           "type": "OpacityCapability::OpacityBehavior"
         },
@@ -3849,6 +3960,10 @@
         {
           "name": "FollowMouseCursor",
           "type": "utils::FollowMouseCursor"
+        },
+        {
+          "name": "GridInfo",
+          "type": "pvz::GridInfo"
         },
         {
           "name": "Opacity",
@@ -4148,11 +4263,11 @@
           "conditions": [
             {
               "type": {
-                "value": "Spawner::HasSpawnRequest"
+                "value": "SignalReceived"
               },
               "parameters": [
                 "",
-                ""
+                "\"spawn\""
               ]
             }
           ],
@@ -4161,13 +4276,14 @@
             {
               "type": "BuiltinCommonInstructions::JsCode",
               "inlineCode": [
-                "let {ObjName, PosX, PosY, Layer} = JSON.parse(gdjs.evtsExt__Spawner__PollSpawnRequest.func(runtimeScene));",
+                "const payload = gdjs.evtTools.signal.getSignalPayload(runtimeScene);",
+                "const data = payload ? JSON.parse(payload) : {};",
                 "",
-                "console.log(\"js code:\"+ObjName)",
+                "console.log(\"spawn payload:\"+data)",
                 "",
-                "let obj = runtimeScene.createObject(ObjName);",
-                "obj.setPosition(PosX,PosY);",
-                "obj.setLayer(Layer);",
+                "let obj = runtimeScene.createObject(data.ObjectName);",
+                "obj.setPosition(data.PosX,data.PosY);",
+                "obj.setLayer(data.Layer);",
                 "",
                 ""
               ],
@@ -5058,6 +5174,233 @@
               "name": "IsDeadV",
               "type": "boolean",
               "value": false
+            }
+          ]
+        },
+        {
+          "description": "",
+          "fullName": "GridInfo",
+          "helpPath": "",
+          "iconUrl": "",
+          "name": "GridInfo",
+          "objectType": "",
+          "previewIconUrl": "",
+          "eventsFunctions": [
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "SetRow",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Row",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::GridInfo",
+                  "type": "behavior"
+                },
+                {
+                  "description": "",
+                  "name": "Value",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "SetColumn",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Column",
+                        "=",
+                        "Value"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::GridInfo",
+                  "type": "behavior"
+                },
+                {
+                  "description": "",
+                  "name": "Value",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "SetRowAndColumn",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Column",
+                        "=",
+                        "Param_Column"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Row",
+                        "=",
+                        "Param_Row"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::GridInfo",
+                  "type": "behavior"
+                },
+                {
+                  "description": "",
+                  "name": "Param_Row",
+                  "type": "expression"
+                },
+                {
+                  "description": "",
+                  "name": "Param_Column",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Expression",
+              "name": "GetRow",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetReturnNumber"
+                      },
+                      "parameters": [
+                        "Row"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "expressionType": {
+                "type": "expression"
+              },
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "pvz::GridInfo",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            }
+          ],
+          "eventsFunctionsFolderStructure": {
+            "folderName": "__ROOT",
+            "children": [
+              {
+                "functionName": "SetRow"
+              },
+              {
+                "functionName": "GetRow"
+              },
+              {
+                "functionName": "SetColumn"
+              },
+              {
+                "functionName": "SetRowAndColumn"
+              }
+            ]
+          },
+          "propertyDescriptors": [],
+          "propertiesFolderStructure": {
+            "folderName": "__ROOT"
+          },
+          "variables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Column",
+              "type": "number",
+              "value": 0
             }
           ]
         }
@@ -8739,9 +9082,19 @@
               "DamageValue": 0,
               "AutoReset": true,
               "Property": ""
+            },
+            {
+              "name": "GridInfo",
+              "type": "pvz::GridInfo"
             }
           ],
-          "variables": [],
+          "variables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 0
+            }
+          ],
           "eventsFunctions": [
             {
               "fullName": "",
@@ -8959,7 +9312,7 @@
                 {
                   "description": "Payload",
                   "name": "Payload",
-                  "type": "variable"
+                  "type": "string"
                 },
                 {
                   "description": "Emitter object name",
@@ -8989,21 +9342,9 @@
               }
             ]
           },
-          "propertyDescriptors": [
-            {
-              "value": "",
-              "type": "Number",
-              "label": "",
-              "name": "Property"
-            }
-          ],
+          "propertyDescriptors": [],
           "propertiesFolderStructure": {
-            "folderName": "__ROOT",
-            "children": [
-              {
-                "propertyName": "Property"
-              }
-            ]
+            "folderName": "__ROOT"
           },
           "variants": []
         },
@@ -9672,6 +10013,10 @@
           },
           "behaviors": [
             {
+              "name": "GridInfo",
+              "type": "pvz::GridInfo"
+            },
+            {
               "name": "RepeatTimer",
               "type": "RepeatEveryXSeconds::RepeatTimer",
               "TimerName": "MyTimer",
@@ -9680,7 +10025,13 @@
               "Counter": 0
             }
           ],
-          "variables": [],
+          "variables": [
+            {
+              "name": "FindEnemy",
+              "type": "boolean",
+              "value": false
+            }
+          ],
           "eventsFunctions": [
             {
               "fullName": "",
@@ -9692,7 +10043,6 @@
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
-                      "disabled": true,
                       "type": {
                         "value": "BooleanVariable"
                       },
@@ -9718,25 +10068,81 @@
                   "actions": [
                     {
                       "type": {
-                        "value": "Spawner::PushSpawnRequest"
+                        "value": "SetStringVariable"
                       },
                       "parameters": [
-                        "",
-                        "BulletConfig.prefabName",
-                        "BulletConfig.layer",
-                        "Object.X()+NewSprite.PointX(\"ShootPoint\")",
-                        "Object.Y()+NewSprite.PointY(\"ShootPoint\")",
-                        ""
+                        "SpawnData.ObjectName",
+                        "=",
+                        "BulletConfig.prefabName"
                       ]
                     },
                     {
                       "type": {
-                        "value": "DebuggerTools::ConsoleLog"
+                        "value": "SetStringVariable"
                       },
                       "parameters": [
-                        "\"shoot bullet\"",
-                        "\"info\"",
-                        ""
+                        "SpawnData.Layer",
+                        "=",
+                        "BulletConfig.layer"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.PosX",
+                        "=",
+                        "Object.X()+NewSprite.PointX(\"ShootPoint\")"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.PosY",
+                        "=",
+                        "Object.Y()+NewSprite.PointY(\"ShootPoint\")"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSceneSignal"
+                      },
+                      "parameters": [
+                        "",
+                        "\"spawn\"",
+                        "ToJSON(SpawnData)",
+                        "Object"
+                      ]
+                    }
+                  ],
+                  "variables": [
+                    {
+                      "name": "SpawnData",
+                      "type": "structure",
+                      "children": [
+                        {
+                          "name": "Layer",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "ObjectName",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "PosX",
+                          "type": "number",
+                          "value": 0
+                        },
+                        {
+                          "name": "PosY",
+                          "type": "number",
+                          "value": 0
+                        }
                       ]
                     }
                   ]
@@ -9756,6 +10162,90 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onSignal",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"EnemyCome\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "Payload",
+                        "=",
+                        "ToString(Object.GridInfo::GetRow())"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"peashooter receive enemy come\" + EmitterObjectName+\", row=\"+ ToString(Object.GridInfo::GetRow())+\",payload=\"+Payload",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "FindEnemy",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::PeaShooter",
+                  "type": "object"
+                },
+                {
+                  "description": "Signal name",
+                  "name": "SignalName",
+                  "type": "signalName"
+                },
+                {
+                  "description": "Payload",
+                  "name": "Payload",
+                  "type": "string"
+                },
+                {
+                  "description": "Emitter object name",
+                  "name": "EmitterObjectName",
+                  "type": "string"
+                },
+                {
+                  "description": "Emitter instance id",
+                  "name": "EmitterInstanceId",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -9763,16 +10253,13 @@
             "children": [
               {
                 "functionName": "doStepPostEvents"
+              },
+              {
+                "functionName": "onSignal"
               }
             ]
           },
           "propertyDescriptors": [
-            {
-              "value": "",
-              "type": "Boolean",
-              "label": "",
-              "name": "FindEnemy"
-            },
             {
               "value": "{\"prefabName\":\"PeaBullet\",\"speed\":100,\"layer\":\"Spawnable\"}",
               "type": "JsonObject",
@@ -9785,9 +10272,6 @@
             "children": [
               {
                 "propertyName": "BulletConfig"
-              },
-              {
-                "propertyName": "FindEnemy"
               }
             ]
           },
@@ -16118,6 +16602,10 @@
             "gameEditorMode": "instances-editor"
           },
           "behaviors": [
+            {
+              "name": "GridInfo",
+              "type": "pvz::GridInfo"
+            },
             {
               "name": "RepeatTimer",
               "type": "RepeatEveryXSeconds::RepeatTimer",
