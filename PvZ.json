@@ -2064,7 +2064,13 @@
       "persistentUuid": "85686fa2-3590-4723-a925-7f2e4d90d840",
       "type": "pvz::Zombie",
       "variant": "",
-      "variables": [],
+      "variables": [
+        {
+          "name": "Row",
+          "type": "number",
+          "value": 0
+        }
+      ],
       "effects": [],
       "behaviors": [
         {
@@ -2302,7 +2308,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.9045052888202113,
+        "zoomFactor": 0.7412978919222379,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2437,25 +2443,31 @@
           "name": "Zombie",
           "persistentUuid": "6aafd6ea-d02d-44a7-9eb3-e61c064374d3",
           "width": 0,
-          "x": 847,
-          "y": 112,
+          "x": 869,
+          "y": 319,
           "zOrder": 9,
           "numberProperties": [],
           "stringProperties": [],
-          "initialVariables": []
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 3
+            }
+          ]
         },
         {
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 55,
+          "height": 25,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
           "persistentUuid": "e8128e0c-800b-4073-a845-08d9260cabc9",
           "width": 19,
           "x": 788,
-          "y": 506,
+          "y": 512,
           "zOrder": 10,
           "numberProperties": [],
           "stringProperties": [],
@@ -2471,14 +2483,14 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 55,
+          "height": 38,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
           "persistentUuid": "44818828-c87c-4439-bc37-5e8a8f922b20",
           "width": 19,
-          "x": 787,
-          "y": 101,
+          "x": 786,
+          "y": 121,
           "zOrder": 10,
           "numberProperties": [],
           "stringProperties": [],
@@ -2494,14 +2506,14 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 55,
+          "height": 31,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
           "persistentUuid": "ef4c7697-d803-4edc-8b54-afcdaf799657",
           "width": 19,
-          "x": 787,
-          "y": 202,
+          "x": 786,
+          "y": 199,
           "zOrder": 10,
           "numberProperties": [],
           "stringProperties": [],
@@ -2517,14 +2529,14 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 55,
+          "height": 31,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
           "persistentUuid": "7013701e-14f0-450b-96f8-a1c50df8bf29",
           "width": 19,
-          "x": 790,
-          "y": 310,
+          "x": 789,
+          "y": 321,
           "zOrder": 10,
           "numberProperties": [],
           "stringProperties": [],
@@ -2540,14 +2552,14 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 55,
+          "height": 34,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
           "persistentUuid": "9de41299-66e5-422a-aa1d-aafc08b4537f",
           "width": 19,
-          "x": 794,
-          "y": 402,
+          "x": 791,
+          "y": 411,
           "zOrder": 10,
           "numberProperties": [],
           "stringProperties": [],
@@ -2556,6 +2568,28 @@
               "name": "Row",
               "type": "number",
               "value": 4
+            }
+          ]
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "Zombie",
+          "persistentUuid": "a93a717e-ef2d-4646-a0f1-602954c2ad68",
+          "width": 0,
+          "x": 857,
+          "y": 122,
+          "zOrder": 9,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": [
+            {
+              "name": "Row",
+              "type": "number",
+              "value": 1
             }
           ]
         }
@@ -2651,6 +2685,11 @@
           "type": "Sprite",
           "updateIfNotVisible": false,
           "variables": [
+            {
+              "name": "HasEnemy",
+              "type": "boolean",
+              "value": false
+            },
             {
               "name": "Row",
               "type": "number",
@@ -2835,16 +2874,35 @@
                     "",
                     ""
                   ]
-                },
+                }
+              ],
+              "events": [
                 {
-                  "type": {
-                    "value": "pvz::GridInfo::SetRow"
-                  },
-                  "parameters": [
-                    "Zombie",
-                    "GridInfo",
-                    "1",
-                    ""
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "Zombie",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "pvz::GridInfo::SetRow"
+                      },
+                      "parameters": [
+                        "Zombie",
+                        "GridInfo",
+                        "Zombie.Row",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"zombie row : \"+ ToString(Zombie.GridInfo::GetRow())",
+                        "",
+                        ""
+                      ]
+                    }
                   ]
                 }
               ]
@@ -2857,6 +2915,7 @@
           "colorG": 134,
           "colorR": 110,
           "creationTime": 0,
+          "folded": true,
           "name": "Card Slots Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2968,6 +3027,7 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
+          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3111,6 +3171,7 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
+          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3204,7 +3265,8 @@
               "type": "BuiltinCommonInstructions::Group",
               "events": [
                 {
-                  "type": "BuiltinCommonInstructions::Standard",
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "EnemyDetector",
                   "conditions": [
                     {
                       "type": {
@@ -3215,14 +3277,19 @@
                         "ZombiesGroup",
                         "",
                         "",
-                        ""
+                        "no"
                       ]
                     },
                     {
                       "type": {
-                        "value": "BuiltinCommonInstructions::Once"
+                        "value": "BooleanObjectVariable"
                       },
-                      "parameters": []
+                      "parameters": [
+                        "EnemyDetector",
+                        "HasEnemy",
+                        "False",
+                        ""
+                      ]
                     }
                   ],
                   "actions": [
@@ -3234,8 +3301,62 @@
                         "",
                         "\"ShooterPlantsGroup\"",
                         "\"EnemyCome\"",
-                        "EnemyDetector.Row",
-                        "ZombiesGroup"
+                        "ToString(EnemyDetector.Row)",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetBooleanObjectVariable"
+                      },
+                      "parameters": [
+                        "EnemyDetector",
+                        "HasEnemy",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "EnemyDetector",
+                  "conditions": [
+                    {
+                      "type": {
+                        "inverted": true,
+                        "value": "CollisionNP"
+                      },
+                      "parameters": [
+                        "EnemyDetector",
+                        "ZombiesGroup",
+                        "",
+                        "",
+                        "no"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "BooleanObjectVariable"
+                      },
+                      "parameters": [
+                        "EnemyDetector",
+                        "HasEnemy",
+                        "True",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanObjectVariable"
+                      },
+                      "parameters": [
+                        "EnemyDetector",
+                        "HasEnemy",
+                        "False",
+                        ""
                       ]
                     }
                   ]
@@ -3248,6 +3369,7 @@
               "colorG": 41,
               "colorR": 62,
               "creationTime": 0,
+              "disabled": true,
               "name": "Zombies Attack Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3428,6 +3550,46 @@
                 }
               ],
               "parameters": []
+            }
+          ],
+          "parameters": []
+        },
+        {
+          "colorB": 95,
+          "colorG": 127,
+          "colorR": 21,
+          "creationTime": 0,
+          "name": "Signal Dispatcher",
+          "source": "",
+          "type": "BuiltinCommonInstructions::Group",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "SignalReceived"
+                  },
+                  "parameters": [
+                    "",
+                    "\"EnemyDie\""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "EmitSignalToObjectGroup"
+                  },
+                  "parameters": [
+                    "",
+                    "\"ShooterPlantsGroup\"",
+                    "\"EnemyDie\"",
+                    "SignalPayload()",
+                    "Zombie"
+                  ]
+                }
+              ]
             }
           ],
           "parameters": []
@@ -9267,32 +9429,6 @@
                         "\"test\"",
                         "Object"
                       ]
-                    },
-                    {
-                      "type": {
-                        "value": "EmitSignalToBehavior"
-                      },
-                      "parameters": [
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "EmitSignalToObjectInstance"
-                      },
-                      "parameters": [
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
-                      ]
                     }
                   ]
                 }
@@ -9934,6 +10070,17 @@
                   ]
                 }
               ]
+            },
+            {
+              "assetStoreId": "",
+              "name": "HealthBar",
+              "persistentUuid": "9c7b3fa9-7602-4b70-af63-65db222712dd",
+              "type": "utils::HealthBar",
+              "variant": "",
+              "variables": [],
+              "effects": [],
+              "behaviors": [],
+              "content": {}
             }
           ],
           "objectsFolderStructure": {
@@ -9941,6 +10088,9 @@
             "children": [
               {
                 "objectName": "NewSprite"
+              },
+              {
+                "objectName": "HealthBar"
               }
             ]
           },
@@ -9992,6 +10142,23 @@
               "numberProperties": [],
               "stringProperties": [],
               "initialVariables": []
+            },
+            {
+              "angle": 0,
+              "customSize": true,
+              "depth": 1,
+              "height": 16,
+              "keepRatio": true,
+              "layer": "",
+              "name": "HealthBar",
+              "persistentUuid": "52f72844-c178-4e65-890d-85c7cc2b641f",
+              "width": 80,
+              "x": -31,
+              "y": -53,
+              "zOrder": 2,
+              "numberProperties": [],
+              "stringProperties": [],
+              "initialVariables": []
             }
           ],
           "editionSettings": {
@@ -10006,7 +10173,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 3.3144234495053673,
+            "zoomFactor": 2.9026572891066227,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -10211,6 +10378,43 @@
                       "parameters": [
                         "FindEnemy",
                         "True",
+                        ""
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"EnemyDie\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "Payload",
+                        "=",
+                        "ToString(Object.GridInfo::GetRow())"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetBooleanVariable"
+                      },
+                      "parameters": [
+                        "FindEnemy",
+                        "False",
                         ""
                       ]
                     }
@@ -16923,6 +17127,16 @@
                         "State",
                         "=",
                         "\"Die\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSceneSignal"
+                      },
+                      "parameters": [
+                        "",
+                        "\"EnemyDie\"",
+                        "ToString(Object.GridInfo::GetRow())"
                       ]
                     }
                   ],
