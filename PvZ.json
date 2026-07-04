@@ -2307,7 +2307,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.7921344117998238,
+        "zoomFactor": 0.9350055057185507,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2442,8 +2442,8 @@
           "name": "Zombie",
           "persistentUuid": "6aafd6ea-d02d-44a7-9eb3-e61c064374d3",
           "width": 0,
-          "x": 857,
-          "y": 319,
+          "x": 855,
+          "y": 320,
           "zOrder": 9,
           "numberProperties": [],
           "stringProperties": [],
@@ -2579,8 +2579,8 @@
           "name": "Zombie",
           "persistentUuid": "a93a717e-ef2d-4646-a0f1-602954c2ad68",
           "width": 0,
-          "x": 857,
-          "y": 122,
+          "x": 855,
+          "y": 123,
           "zOrder": 9,
           "numberProperties": [],
           "stringProperties": [],
@@ -2597,6 +2597,7 @@
         {
           "assetStoreId": "",
           "name": "SunCountBoard",
+          "persistentUuid": "ae75610d-e651-43f7-b931-222c4ea564d0",
           "type": "pvz::SunCountBoard",
           "variant": "",
           "variables": [],
@@ -3235,6 +3236,7 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
+          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -16897,7 +16899,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 1.886062212299614,
+            "zoomFactor": 1.7650210888265405,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -17131,6 +17133,15 @@
                         "State",
                         "=",
                         "\"Walking\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetIncludedInParentCollisionMask"
+                      },
+                      "parameters": [
+                        "DropHead",
+                        ""
                       ]
                     }
                   ]
