@@ -1956,6 +1956,15 @@
           "isInheritedFromObjectType": true,
           "name": "GridInfo",
           "type": "pvz::GridInfo"
+        },
+        {
+          "isInheritedFromObjectType": true,
+          "name": "RepeatTimer",
+          "type": "RepeatEveryXSeconds::RepeatTimer",
+          "TimerName": "MyTimer",
+          "TimerLength": 1,
+          "Limit": -1,
+          "Counter": 0
         }
       ],
       "content": {
@@ -2831,6 +2840,7 @@
           "type": "BuiltinCommonInstructions::Group",
           "events": [
             {
+              "folded": true,
               "type": "BuiltinCommonInstructions::Standard",
               "conditions": [
                 {
@@ -3162,7 +3172,6 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
-          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3170,66 +3179,76 @@
             {
               "type": "BuiltinCommonInstructions::ForEach",
               "object": "Sun",
-              "conditions": [
+              "conditions": [],
+              "actions": [],
+              "events": [
                 {
-                  "type": {
-                    "value": "utils::IsMouseClick"
-                  },
-                  "parameters": [
-                    "",
-                    "Sun",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "AddForceTowardObject"
-                  },
-                  "parameters": [
-                    "Sun",
-                    "SunCountBoard",
-                    "600",
-                    "1"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BuiltinCommonInstructions::Standard",
-              "conditions": [
-                {
-                  "type": {
-                    "value": "CollisionNP"
-                  },
-                  "parameters": [
-                    "Sun",
-                    "SunCountBoard",
-                    "",
-                    "",
-                    ""
-                  ]
-                }
-              ],
-              "actions": [
-                {
-                  "type": {
-                    "value": "pvz::SunCountBoard::AddSun"
-                  },
-                  "parameters": [
-                    "SunCountBoard",
-                    "Sun.SunValue()",
-                    ""
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "utils::IsMouseClick"
+                      },
+                      "parameters": [
+                        "",
+                        "Sun",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "AddForceTowardObject"
+                      },
+                      "parameters": [
+                        "Sun",
+                        "SunCountBoard",
+                        "600",
+                        "1"
+                      ]
+                    }
                   ]
                 },
                 {
-                  "type": {
-                    "value": "Delete"
-                  },
-                  "parameters": [
-                    "Sun",
-                    ""
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "CollisionEnter"
+                      },
+                      "parameters": [
+                        "Sun",
+                        "SunCountBoard",
+                        "",
+                        "",
+                        "",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "Delete"
+                      },
+                      "parameters": [
+                        "Sun",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSignalToPickedObjects"
+                      },
+                      "parameters": [
+                        "",
+                        "SunCountBoard",
+                        "\"SunCollected\"",
+                        "ToString(Sun.SunValue())",
+                        ""
+                      ]
+                    }
                   ]
                 }
               ]
@@ -3242,6 +3261,7 @@
           "colorG": 140,
           "colorR": 210,
           "creationTime": 0,
+          "folded": true,
           "name": "Battle Logic",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3398,54 +3418,29 @@
               "colorG": 249,
               "colorR": 171,
               "creationTime": 0,
-              "disabled": true,
               "name": "Bullet Hit  Zombies",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
               "events": [
                 {
-                  "type": "BuiltinCommonInstructions::Standard",
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "BulletsGroup",
                   "conditions": [
                     {
                       "type": {
-                        "value": "CollisionNP"
+                        "value": "CollisionEnter"
                       },
                       "parameters": [
                         "BulletsGroup",
                         "ZombiesGroup",
                         "",
                         "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::Once"
-                      },
-                      "parameters": []
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "pvz::Zombie::TakeDamage"
-                      },
-                      "parameters": [
-                        "ZombiesGroup",
-                        "50",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"bullet shoot\"",
                         "",
                         ""
                       ]
-                    },
+                    }
+                  ],
+                  "actions": [
                     {
                       "type": {
                         "value": "pvz::BulletHit::PerformHit"
@@ -3469,6 +3464,7 @@
           "colorG": 127,
           "colorR": 21,
           "creationTime": 0,
+          "folded": true,
           "name": "Signal Dispatcher",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3798,10 +3794,6 @@
           "type": "pvz::BulletHit"
         },
         {
-          "name": "CanTakeDamage",
-          "type": "pvz::CanTakeDamage"
-        },
-        {
           "name": "Effect",
           "type": "EffectCapability::EffectBehavior"
         },
@@ -4016,10 +4008,6 @@
         {
           "name": "BulletHit",
           "type": "pvz::BulletHit"
-        },
-        {
-          "name": "CanTakeDamage",
-          "type": "pvz::CanTakeDamage"
         },
         {
           "name": "Effect",
@@ -6931,16 +6919,6 @@
                   "description": "Payload",
                   "name": "Payload",
                   "type": "string"
-                },
-                {
-                  "description": "Emitter object name",
-                  "name": "EmitterObjectName",
-                  "type": "string"
-                },
-                {
-                  "description": "Emitter instance id",
-                  "name": "EmitterInstanceId",
-                  "type": "expression"
                 }
               ],
               "objectGroups": []
@@ -9150,6 +9128,14 @@
             {
               "name": "GridInfo",
               "type": "pvz::GridInfo"
+            },
+            {
+              "name": "RepeatTimer",
+              "type": "RepeatEveryXSeconds::RepeatTimer",
+              "TimerName": "MyTimer",
+              "TimerLength": 1,
+              "Limit": -1,
+              "Counter": 0
             }
           ],
           "variables": [
@@ -9221,6 +9207,7 @@
               "sentence": "",
               "events": [
                 {
+                  "folded": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -9259,6 +9246,104 @@
                             "Object",
                             ""
                           ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "RepeatEveryXSeconds::RepeatTimer::Repeat2"
+                      },
+                      "parameters": [
+                        "Object",
+                        "RepeatTimer",
+                        "\"SpawnSun\"",
+                        "3",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.ObjectName",
+                        "=",
+                        "\"Sun\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.Layer",
+                        "=",
+                        "\"Spawnable\""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.PosX",
+                        "=",
+                        "Object.X()+NewSprite.PointX(\"SunSpawnPoint\")"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "SpawnData.PosY",
+                        "=",
+                        "Object.Y()+NewSprite.PointY(\"SunSpawnPoint\")"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSceneSignal"
+                      },
+                      "parameters": [
+                        "",
+                        "\"spawn\"",
+                        "ToJSON(SpawnData)",
+                        ""
+                      ]
+                    }
+                  ],
+                  "variables": [
+                    {
+                      "name": "SpawnData",
+                      "type": "structure",
+                      "children": [
+                        {
+                          "name": "Layer",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "ObjectName",
+                          "type": "string",
+                          "value": ""
+                        },
+                        {
+                          "name": "PosX",
+                          "type": "number",
+                          "value": 0
+                        },
+                        {
+                          "name": "PosY",
+                          "type": "number",
+                          "value": 0
                         }
                       ]
                     }
@@ -10249,16 +10334,6 @@
                   "actions": [
                     {
                       "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"peashooter receive enemy come\" + EmitterObjectName+\", row=\"+ ToString(Object.GridInfo::GetRow())+\",payload=\"+Payload",
-                        "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
                         "value": "SetBooleanVariable"
                       },
                       "parameters": [
@@ -10323,16 +10398,6 @@
                   "description": "Payload",
                   "name": "Payload",
                   "type": "string"
-                },
-                {
-                  "description": "Emitter object name",
-                  "name": "EmitterObjectName",
-                  "type": "string"
-                },
-                {
-                  "description": "Emitter instance id",
-                  "name": "EmitterInstanceId",
-                  "type": "expression"
                 }
               ],
               "objectGroups": []
@@ -10342,10 +10407,10 @@
             "folderName": "__ROOT",
             "children": [
               {
-                "functionName": "doStepPostEvents"
+                "functionName": "onSignal"
               },
               {
-                "functionName": "onSignal"
+                "functionName": "doStepPostEvents"
               }
             ]
           },
@@ -11805,11 +11870,86 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onSignal",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"SunCollected\""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "SetNumberVariable"
+                          },
+                          "parameters": [
+                            "SunCount",
+                            "=",
+                            "SunCount+ToNumber(Payload)"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "TextContainerCapability::TextContainerBehavior::SetValue"
+                          },
+                          "parameters": [
+                            "SunCountLabel",
+                            "Text",
+                            "=",
+                            "SunCount"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::SunCountBoard",
+                  "type": "object"
+                },
+                {
+                  "description": "Signal name",
+                  "name": "SignalName",
+                  "type": "signalName"
+                },
+                {
+                  "description": "Payload",
+                  "name": "Payload",
+                  "type": "string"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
             "folderName": "__ROOT",
             "children": [
+              {
+                "functionName": "onSignal"
+              },
               {
                 "folderName": "SunCountBoard configuration",
                 "children": [
