@@ -1954,16 +1954,6 @@
       "behaviors": [
         {
           "isInheritedFromObjectType": true,
-          "name": "CanTakeDamage",
-          "type": "pvz::CanTakeDamage",
-          "GotAttack": false,
-          "DamageValue": 0,
-          "AutoReset": true,
-          "MaxHealth": 0,
-          "Property": 0
-        },
-        {
-          "isInheritedFromObjectType": true,
           "name": "GridInfo",
           "type": "pvz::GridInfo"
         }
@@ -3261,7 +3251,6 @@
               "colorG": 151,
               "colorR": 87,
               "creationTime": 0,
-              "folded": true,
               "name": "Check If Can Shoot for Shooter Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3287,11 +3276,11 @@
                   "actions": [
                     {
                       "type": {
-                        "value": "EmitSignalToObjectGroup"
+                        "value": "EmitSignalToPickedObjects"
                       },
                       "parameters": [
                         "",
-                        "\"ShooterPlantsGroup\"",
+                        "ShooterPlantsGroup",
                         "\"EnemyCome\"",
                         "ToString(EnemyDetector.Row)",
                         ""
@@ -3383,7 +3372,7 @@
                         "",
                         "PlantsGroup",
                         "\"TakeDamage\"",
-                        "",
+                        "ToString(ZombiesGroup.InstanceId())",
                         "ZombiesGroup"
                       ]
                     },
@@ -3409,6 +3398,7 @@
               "colorG": 249,
               "colorR": 171,
               "creationTime": 0,
+              "disabled": true,
               "name": "Bullet Hit  Zombies",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -9158,14 +9148,6 @@
           },
           "behaviors": [
             {
-              "name": "CanTakeDamage",
-              "type": "pvz::CanTakeDamage",
-              "GotAttack": false,
-              "DamageValue": 0,
-              "AutoReset": true,
-              "Property": ""
-            },
-            {
               "name": "GridInfo",
               "type": "pvz::GridInfo"
             }
@@ -9173,6 +9155,11 @@
           "variables": [
             {
               "name": "Row",
+              "type": "number",
+              "value": 0
+            },
+            {
+              "name": "Attackers",
               "type": "number",
               "value": 0
             }
@@ -9238,52 +9225,32 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "pvz::CanTakeDamage::HasGotDamage"
-                      },
-                      "parameters": [
-                        "Object",
-                        "CanTakeDamage",
-                        ""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "DebuggerTools::ConsoleLog"
-                      },
-                      "parameters": [
-                        "\"sunflower got damage:\"+ ToString(Object.CanTakeDamage::Damage())",
-                        "",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "utils::HealthBar::TakeDamage"
+                        "value": "utils::HealthBar::IsDead"
                       },
                       "parameters": [
                         "HealthBar",
-                        "Object.CanTakeDamage::Damage()",
                         ""
                       ]
                     }
                   ],
+                  "actions": [],
                   "events": [
                     {
                       "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [
+                      "conditions": [],
+                      "actions": [
                         {
                           "type": {
-                            "value": "utils::HealthBar::IsDead"
+                            "value": "EmitSignalToObjectInstance"
                           },
                           "parameters": [
-                            "HealthBar",
+                            "",
+                            "Attackers",
+                            "\"StopAttacking\"",
+                            "",
                             ""
                           ]
-                        }
-                      ],
-                      "actions": [
+                        },
                         {
                           "type": {
                             "value": "Delete"
@@ -9324,7 +9291,7 @@
                       "parameters": [
                         "SignalName",
                         "=",
-                        "\"Attack\""
+                        "\"TakeDamage\""
                       ]
                     }
                   ],
@@ -9334,20 +9301,29 @@
                         "value": "DebuggerTools::ConsoleLog"
                       },
                       "parameters": [
-                        "\"attacker : \"+ EmitterObjectName  +\", instance : \"+ EmitterInstanceId",
+                        "\"sunflower got damage\"",
                         "",
                         ""
                       ]
                     },
                     {
                       "type": {
-                        "value": "EmitSceneSignal"
+                        "value": "utils::HealthBar::TakeDamage"
                       },
                       "parameters": [
-                        "",
-                        "\"aaa\"",
-                        "\"test\"",
-                        "Object"
+                        "HealthBar",
+                        "10",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetNumberVariable"
+                      },
+                      "parameters": [
+                        "Attackers",
+                        "=",
+                        "ToNumber(Payload)"
                       ]
                     }
                   ]
@@ -9369,16 +9345,6 @@
                   "description": "Payload",
                   "name": "Payload",
                   "type": "string"
-                },
-                {
-                  "description": "Emitter object name",
-                  "name": "EmitterObjectName",
-                  "type": "string"
-                },
-                {
-                  "description": "Emitter instance id",
-                  "name": "EmitterInstanceId",
-                  "type": "expression"
                 }
               ],
               "objectGroups": []
@@ -16782,6 +16748,17 @@
                         "=",
                         "Object.X()-TimeDelta() * 10"
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "AnimatableCapability::AnimatableBehavior::SetName"
+                      },
+                      "parameters": [
+                        "NewSprite",
+                        "Animation",
+                        "=",
+                        "\"Walk\""
+                      ]
                     }
                   ]
                 },
@@ -16961,132 +16938,6 @@
             {
               "fullName": "",
               "functionType": "Action",
-              "name": "TakeDamage",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "utils::HealthBar::TakeDamage"
-                      },
-                      "parameters": [
-                        "HealthBar",
-                        "Damage",
-                        ""
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "utils::HealthBar::CurrentHealth"
-                      },
-                      "parameters": [
-                        "HealthBar",
-                        "<=",
-                        "0",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "StringVariable"
-                      },
-                      "parameters": [
-                        "State",
-                        "!=",
-                        "\"Die\""
-                      ]
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetStringVariable"
-                      },
-                      "parameters": [
-                        "State",
-                        "=",
-                        "\"Die\""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "EmitSceneSignal"
-                      },
-                      "parameters": [
-                        "",
-                        "\"EnemyDie\"",
-                        "ToString(Object.GridInfo::GetRow())"
-                      ]
-                    }
-                  ],
-                  "events": [
-                    {
-                      "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [],
-                      "actions": []
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::Zombie",
-                  "type": "object"
-                },
-                {
-                  "description": "",
-                  "name": "Damage",
-                  "type": "expression"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Action",
-              "name": "EnterWalkingMode",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetStringVariable"
-                      },
-                      "parameters": [
-                        "State",
-                        "=",
-                        "\"Walking\""
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::Zombie",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Action",
               "name": "onSignal",
               "sentence": "",
               "events": [
@@ -17116,6 +16967,128 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "folded": true,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"TakeDamage\""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "utils::HealthBar::TakeDamage"
+                          },
+                          "parameters": [
+                            "HealthBar",
+                            "10",
+                            ""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "utils::HealthBar::CurrentHealth"
+                          },
+                          "parameters": [
+                            "HealthBar",
+                            "<=",
+                            "0",
+                            ""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "StringVariable"
+                          },
+                          "parameters": [
+                            "State",
+                            "!=",
+                            "\"Die\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "SetStringVariable"
+                          },
+                          "parameters": [
+                            "State",
+                            "=",
+                            "\"Die\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "EmitSceneSignal"
+                          },
+                          "parameters": [
+                            "",
+                            "\"EnemyDie\"",
+                            "ToString(Object.GridInfo::GetRow())"
+                          ]
+                        }
+                      ],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": []
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"StopAttacking\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "State",
+                        "=",
+                        "\"Walking\""
+                      ]
+                    }
+                  ]
                 }
               ],
               "parameters": [
@@ -17134,16 +17107,6 @@
                   "description": "Payload",
                   "name": "Payload",
                   "type": "string"
-                },
-                {
-                  "description": "Emitter object name",
-                  "name": "EmitterObjectName",
-                  "type": "string"
-                },
-                {
-                  "description": "Emitter instance id",
-                  "name": "EmitterInstanceId",
-                  "type": "expression"
                 }
               ],
               "objectGroups": []
@@ -17156,16 +17119,10 @@
                 "functionName": "onCreated"
               },
               {
-                "functionName": "doStepPostEvents"
-              },
-              {
-                "functionName": "EnterWalkingMode"
-              },
-              {
-                "functionName": "TakeDamage"
-              },
-              {
                 "functionName": "onSignal"
+              },
+              {
+                "functionName": "doStepPostEvents"
               }
             ]
           },
