@@ -2307,7 +2307,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.7412978919222379,
+        "zoomFactor": 0.7921344117998238,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2505,7 +2505,7 @@
           "angle": 0,
           "customSize": true,
           "depth": 1,
-          "height": 31,
+          "height": 64,
           "keepRatio": true,
           "layer": "Spawnable",
           "name": "EnemyDetector",
@@ -16826,7 +16826,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 1.3537093797072217,
+            "zoomFactor": 1.886062212299614,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -17807,6 +17807,15 @@
                         "Resizable",
                         "=",
                         "100"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "SetIncludedInParentCollisionMask"
+                      },
+                      "parameters": [
+                        "Object",
+                        "no"
                       ]
                     }
                   ]
