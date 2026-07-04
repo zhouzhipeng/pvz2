@@ -2443,7 +2443,7 @@
           "name": "Zombie",
           "persistentUuid": "6aafd6ea-d02d-44a7-9eb3-e61c064374d3",
           "width": 0,
-          "x": 869,
+          "x": 857,
           "y": 319,
           "zOrder": 9,
           "numberProperties": [],
@@ -2535,7 +2535,7 @@
           "name": "EnemyDetector",
           "persistentUuid": "7013701e-14f0-450b-96f8-a1c50df8bf29",
           "width": 19,
-          "x": 789,
+          "x": 786,
           "y": 321,
           "zOrder": 10,
           "numberProperties": [],
@@ -2835,6 +2835,7 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
+          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3260,6 +3261,7 @@
               "colorG": 151,
               "colorR": 87,
               "creationTime": 0,
+              "folded": true,
               "name": "Check If Can Shoot for Shooter Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -3270,24 +3272,14 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "CollisionNP"
+                        "value": "CollisionEnter"
                       },
                       "parameters": [
                         "EnemyDetector",
                         "ZombiesGroup",
                         "",
                         "",
-                        "no"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "BooleanObjectVariable"
-                      },
-                      "parameters": [
-                        "EnemyDetector",
-                        "HasEnemy",
-                        "False",
+                        "",
                         ""
                       ]
                     }
@@ -3304,45 +3296,24 @@
                         "ToString(EnemyDetector.Row)",
                         ""
                       ]
-                    },
-                    {
-                      "type": {
-                        "value": "SetBooleanObjectVariable"
-                      },
-                      "parameters": [
-                        "EnemyDetector",
-                        "HasEnemy",
-                        "True",
-                        ""
-                      ]
                     }
                   ]
                 },
                 {
+                  "disabled": true,
                   "type": "BuiltinCommonInstructions::ForEach",
                   "object": "EnemyDetector",
                   "conditions": [
                     {
                       "type": {
-                        "inverted": true,
-                        "value": "CollisionNP"
+                        "value": "CollisionExit"
                       },
                       "parameters": [
                         "EnemyDetector",
                         "ZombiesGroup",
                         "",
                         "",
-                        "no"
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "BooleanObjectVariable"
-                      },
-                      "parameters": [
-                        "EnemyDetector",
-                        "HasEnemy",
-                        "True",
+                        "",
                         ""
                       ]
                     }
@@ -3350,12 +3321,13 @@
                   "actions": [
                     {
                       "type": {
-                        "value": "SetBooleanObjectVariable"
+                        "value": "EmitSignalToObjectGroup"
                       },
                       "parameters": [
-                        "EnemyDetector",
-                        "HasEnemy",
-                        "False",
+                        "",
+                        "\"ShooterPlantsGroup\"",
+                        "\"EnemyExit\"",
+                        "ToString(EnemyDetector.Row)",
                         ""
                       ]
                     }
@@ -3369,13 +3341,13 @@
               "colorG": 41,
               "colorR": 62,
               "creationTime": 0,
-              "disabled": true,
               "name": "Zombies Attack Plants",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
               "events": [
                 {
-                  "type": "BuiltinCommonInstructions::Standard",
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "ZombiesGroup",
                   "conditions": [
                     {
                       "type": {
@@ -3388,95 +3360,43 @@
                         "",
                         ""
                       ]
+                    },
+                    {
+                      "type": {
+                        "value": "RepeatEveryXSeconds::RepeatTimer::Repeat2"
+                      },
+                      "parameters": [
+                        "ZombiesGroup",
+                        "RepeatTimer",
+                        "\"AttackTimer\"",
+                        "1",
+                        ""
+                      ]
                     }
                   ],
-                  "actions": [],
-                  "events": [
+                  "actions": [
                     {
-                      "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [
-                        {
-                          "type": {
-                            "value": "RepeatEveryXSeconds::RepeatTimer::Repeat2"
-                          },
-                          "parameters": [
-                            "ZombiesGroup",
-                            "RepeatTimer",
-                            "\"AttackTimer\"",
-                            "1",
-                            ""
-                          ]
-                        }
-                      ],
-                      "actions": [
-                        {
-                          "type": {
-                            "value": "pvz::Zombie::EnterAttackMode"
-                          },
-                          "parameters": [
-                            "ZombiesGroup",
-                            "ZombieController"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "pvz::CanTakeDamage::TakeDamage"
-                          },
-                          "parameters": [
-                            "PlantsGroup",
-                            "CanTakeDamage",
-                            "10",
-                            "IsTargetDead",
-                            ""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "EmitSignalToPickedObjects"
-                          },
-                          "parameters": [
-                            "",
-                            "PlantsGroup",
-                            "\"Attack\"",
-                            "",
-                            "ZombiesGroup"
-                          ]
-                        }
-                      ],
-                      "events": [
-                        {
-                          "type": "BuiltinCommonInstructions::Standard",
-                          "conditions": [
-                            {
-                              "type": {
-                                "value": "BooleanVariable"
-                              },
-                              "parameters": [
-                                "IsTargetDead",
-                                "True",
-                                ""
-                              ]
-                            }
-                          ],
-                          "actions": [
-                            {
-                              "type": {
-                                "value": "pvz::Zombie::EnterWalkingMode"
-                              },
-                              "parameters": [
-                                "ZombiesGroup",
-                                ""
-                              ]
-                            }
-                          ]
-                        }
-                      ],
-                      "variables": [
-                        {
-                          "name": "IsTargetDead",
-                          "type": "boolean",
-                          "value": false
-                        }
+                      "type": {
+                        "value": "EmitSignalToPickedObjects"
+                      },
+                      "parameters": [
+                        "",
+                        "PlantsGroup",
+                        "\"TakeDamage\"",
+                        "",
+                        "ZombiesGroup"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "EmitSignalToPickedObjects"
+                      },
+                      "parameters": [
+                        "",
+                        "ZombiesGroup",
+                        "\"Attack\"",
+                        "",
+                        "ZombiesGroup"
                       ]
                     }
                   ]
@@ -16835,39 +16755,6 @@
             {
               "fullName": "",
               "functionType": "Action",
-              "name": "EnterAttackMode",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": [
-                    {
-                      "type": {
-                        "value": "SetStringVariable"
-                      },
-                      "parameters": [
-                        "State",
-                        "=",
-                        "\"Attacking\""
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::Zombie",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Action",
               "name": "doStepPostEvents",
               "sentence": "",
               "events": [
@@ -17196,6 +17083,70 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onSignal",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "StringVariable"
+                      },
+                      "parameters": [
+                        "SignalName",
+                        "=",
+                        "\"Attack\""
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "SetStringVariable"
+                      },
+                      "parameters": [
+                        "State",
+                        "=",
+                        "\"Attacking\""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Zombie",
+                  "type": "object"
+                },
+                {
+                  "description": "Signal name",
+                  "name": "SignalName",
+                  "type": "signalName"
+                },
+                {
+                  "description": "Payload",
+                  "name": "Payload",
+                  "type": "string"
+                },
+                {
+                  "description": "Emitter object name",
+                  "name": "EmitterObjectName",
+                  "type": "string"
+                },
+                {
+                  "description": "Emitter instance id",
+                  "name": "EmitterInstanceId",
+                  "type": "expression"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -17208,13 +17159,13 @@
                 "functionName": "doStepPostEvents"
               },
               {
-                "functionName": "EnterAttackMode"
-              },
-              {
                 "functionName": "EnterWalkingMode"
               },
               {
                 "functionName": "TakeDamage"
+              },
+              {
+                "functionName": "onSignal"
               }
             ]
           },
