@@ -2591,6 +2591,38 @@
               "value": 1
             }
           ]
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "NewSprite",
+          "persistentUuid": "ef5e28cd-a7ec-406e-8e00-4292b15b1418",
+          "width": 0,
+          "x": 499,
+          "y": 241,
+          "zOrder": 11,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "NewSprite",
+          "persistentUuid": "df25f11b-2fbd-4eff-a744-22fb0ed1154c",
+          "width": 0,
+          "x": 211,
+          "y": 234,
+          "zOrder": 11,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
         }
       ],
       "objects": [
@@ -2801,6 +2833,62 @@
             "lineHeight": 0,
             "color": "252;212;8"
           }
+        },
+        {
+          "assetStoreId": "",
+          "bold": false,
+          "italic": false,
+          "name": "NewText",
+          "persistentUuid": "39064616-a87f-4e1d-acd8-df4edd9931dc",
+          "smoothed": true,
+          "type": "TextObject::Text",
+          "underlined": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "string": "{{i18n[\"button1.label\"].$locale}}",
+          "font": "",
+          "textAlignment": "left",
+          "characterSize": 20,
+          "color": {
+            "b": 0,
+            "g": 0,
+            "r": 0
+          },
+          "content": {
+            "bold": false,
+            "isOutlineEnabled": false,
+            "isShadowEnabled": false,
+            "italic": false,
+            "outlineColor": "255;255;255",
+            "outlineThickness": 2,
+            "shadowAngle": 90,
+            "shadowBlurRadius": 2,
+            "shadowColor": "0;0;0",
+            "shadowDistance": 4,
+            "shadowOpacity": 127,
+            "smoothed": true,
+            "underlined": false,
+            "text": "{{i18n[\"button1.label\"].$locale}}",
+            "font": "",
+            "textAlignment": "left",
+            "verticalTextAlignment": "top",
+            "characterSize": 20,
+            "lineHeight": 0,
+            "color": "0;0;0"
+          }
+        },
+        {
+          "adaptCollisionMaskAutomatically": true,
+          "assetStoreId": "",
+          "name": "NewSprite",
+          "persistentUuid": "3692dd15-eedf-4341-8783-c394632bbae5",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "animations": []
         }
       ],
       "objectsFolderStructure": {
@@ -2823,6 +2911,12 @@
           },
           {
             "objectName": "FPS"
+          },
+          {
+            "objectName": "NewText"
+          },
+          {
+            "objectName": "NewSprite"
           }
         ]
       },
@@ -2859,6 +2953,7 @@
           "colorG": 183,
           "colorR": 38,
           "creationTime": 0,
+          "folded": true,
           "name": "External Layouts",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2898,7 +2993,6 @@
           "colorG": 30,
           "colorR": 239,
           "creationTime": 0,
-          "folded": true,
           "name": "Initialization",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2936,6 +3030,16 @@
                     "",
                     "assets/bgm1.mp3",
                     "",
+                    "",
+                    ""
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"test>>\"+ConfigString(\"{{cards.Sunflower.previewObjectName}}\")",
                     "",
                     ""
                   ]
@@ -3529,7 +3633,6 @@
           "colorG": 127,
           "colorR": 21,
           "creationTime": 0,
-          "folded": true,
           "name": "Signal Dispatcher",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -11751,7 +11854,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 4.22245869886837,
+            "zoomFactor": 3.697883118118487,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -16899,7 +17002,7 @@
             "gridColor": 10401023,
             "gridAlpha": 0.8,
             "snap": false,
-            "zoomFactor": 1.7650210888265405,
+            "zoomFactor": 2.0154040601461087,
             "windowMask": false,
             "selectedLayer": "",
             "gameEditorMode": "instances-editor"
@@ -24168,6 +24271,22 @@
           "numberProperties": [],
           "stringProperties": [],
           "initialVariables": []
+        },
+        {
+          "angle": 0,
+          "customSize": false,
+          "height": 0,
+          "keepRatio": true,
+          "layer": "Spawnable",
+          "name": "NewText",
+          "persistentUuid": "07b68d8c-ab29-43d2-bddd-37895d028e84",
+          "width": 0,
+          "x": 24,
+          "y": 146,
+          "zOrder": 3,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
         }
       ],
       "editionSettings": {
@@ -24182,7 +24301,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.6811508458005683,
+        "zoomFactor": 0.8591415111095277,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
