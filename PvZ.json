@@ -2591,38 +2591,6 @@
               "value": 1
             }
           ]
-        },
-        {
-          "angle": 0,
-          "customSize": false,
-          "height": 0,
-          "keepRatio": true,
-          "layer": "Spawnable",
-          "name": "NewSprite",
-          "persistentUuid": "ef5e28cd-a7ec-406e-8e00-4292b15b1418",
-          "width": 0,
-          "x": 499,
-          "y": 241,
-          "zOrder": 11,
-          "numberProperties": [],
-          "stringProperties": [],
-          "initialVariables": []
-        },
-        {
-          "angle": 0,
-          "customSize": false,
-          "height": 0,
-          "keepRatio": true,
-          "layer": "Spawnable",
-          "name": "NewSprite",
-          "persistentUuid": "df25f11b-2fbd-4eff-a744-22fb0ed1154c",
-          "width": 0,
-          "x": 211,
-          "y": 234,
-          "zOrder": 11,
-          "numberProperties": [],
-          "stringProperties": [],
-          "initialVariables": []
         }
       ],
       "objects": [
@@ -2879,16 +2847,54 @@
           }
         },
         {
-          "adaptCollisionMaskAutomatically": true,
           "assetStoreId": "",
-          "name": "NewSprite",
-          "persistentUuid": "3692dd15-eedf-4341-8783-c394632bbae5",
-          "type": "Sprite",
-          "updateIfNotVisible": false,
-          "variables": [],
+          "bold": false,
+          "italic": false,
+          "name": "NewText2",
+          "persistentUuid": "4863b634-a475-4d0b-82e9-ed9dd220225b",
+          "smoothed": true,
+          "type": "TextObject::Text",
+          "underlined": false,
+          "variables": [
+            {
+              "name": "TT",
+              "type": "number",
+              "value": 0
+            }
+          ],
           "effects": [],
           "behaviors": [],
-          "animations": []
+          "string": "777",
+          "font": "",
+          "textAlignment": "left",
+          "characterSize": 60,
+          "color": {
+            "b": 0,
+            "g": 0,
+            "r": 0
+          },
+          "content": {
+            "bold": false,
+            "isOutlineEnabled": false,
+            "isShadowEnabled": false,
+            "italic": false,
+            "outlineColor": "255;255;255",
+            "outlineThickness": 2,
+            "shadowAngle": 90,
+            "shadowBlurRadius": 2,
+            "shadowColor": "0;0;0",
+            "shadowDistance": 4,
+            "shadowOpacity": 127,
+            "smoothed": true,
+            "underlined": false,
+            "text": "777",
+            "font": "",
+            "textAlignment": "left",
+            "verticalTextAlignment": "top",
+            "characterSize": 60,
+            "lineHeight": 0,
+            "color": "0;0;0"
+          }
         }
       ],
       "objectsFolderStructure": {
@@ -2916,7 +2922,7 @@
             "objectName": "NewText"
           },
           {
-            "objectName": "NewSprite"
+            "objectName": "NewText2"
           }
         ]
       },
@@ -2926,7 +2932,6 @@
           "colorG": 46,
           "colorR": 100,
           "creationTime": 0,
-          "folded": true,
           "name": "External Events",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -2944,6 +2949,13 @@
                 "includeConfig": 0
               },
               "target": "Main_HandleSpawnRequests"
+            },
+            {
+              "type": "BuiltinCommonInstructions::Link",
+              "include": {
+                "includeConfig": 0
+              },
+              "target": "Main_Test"
             }
           ],
           "parameters": []
@@ -2953,7 +2965,6 @@
           "colorG": 183,
           "colorR": 38,
           "creationTime": 0,
-          "folded": true,
           "name": "External Layouts",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3084,7 +3095,6 @@
           "colorG": 134,
           "colorR": 110,
           "creationTime": 0,
-          "folded": true,
           "name": "Card Slots Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3196,7 +3206,6 @@
           "colorG": 245,
           "colorR": 210,
           "creationTime": 0,
-          "folded": true,
           "name": "Planting Input",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -3340,7 +3349,6 @@
           "colorG": 211,
           "colorR": 135,
           "creationTime": 0,
-          "folded": true,
           "name": "Sun Collecting",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -4526,6 +4534,83 @@
               "parameterObjects": "",
               "useStrict": true,
               "eventsSheetExpanded": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "associatedLayout": "Main",
+      "name": "Main_Test",
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "value": "SceneJustBegins"
+              },
+              "parameters": [
+                ""
+              ]
+            }
+          ],
+          "actions": [],
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "disabled": true,
+                  "type": {
+                    "value": "PickRandomInstance"
+                  },
+                  "parameters": [
+                    "",
+                    "NewText2"
+                  ]
+                },
+                {
+                  "disabled": true,
+                  "type": {
+                    "value": "PickAllInstances"
+                  },
+                  "parameters": [
+                    "",
+                    "NewText2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "SetNumberObjectVariable"
+                  },
+                  "parameters": [
+                    "NewText2",
+                    "TT",
+                    "=",
+                    "33"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "DebuggerTools::ConsoleLog"
+                  },
+                  "parameters": [
+                    "\"test:\"+ NewText2.TT",
+                    "",
+                    ""
+                  ]
+                }
+              ]
+            },
+            {
+              "disabled": true,
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "NewText2",
+              "conditions": [],
+              "actions": []
             }
           ]
         }
@@ -9588,6 +9673,22 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"sunflower got damage\"",
+                        "",
+                        ""
+                      ]
+                    }
+                  ]
                 }
               ],
               "parameters": [
@@ -9609,6 +9710,28 @@
                 }
               ],
               "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onCreated",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": []
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "supplementaryInformation": "pvz::Sunflower",
+                  "type": "object"
+                }
+              ],
+              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -9619,6 +9742,9 @@
               },
               {
                 "functionName": "onSignal"
+              },
+              {
+                "functionName": "onCreated"
               },
               {
                 "functionName": "doStepPostEvents"
