@@ -2307,7 +2307,7 @@
         "gridColor": 10401023,
         "gridAlpha": 0.8,
         "snap": false,
-        "zoomFactor": 0.9350055057185507,
+        "zoomFactor": 0.8188454456336297,
         "windowMask": false,
         "selectedLayer": "",
         "gameEditorMode": "instances-editor"
@@ -2932,6 +2932,7 @@
           "colorG": 46,
           "colorR": 100,
           "creationTime": 0,
+          "folded": true,
           "name": "External Events",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -4528,6 +4529,7 @@
                 "let obj = runtimeScene.createObject(data.ObjectName);",
                 "obj.setPosition(data.PosX,data.PosY);",
                 "obj.setLayer(data.Layer);",
+                "obj.onPlacedInScene();",
                 "",
                 ""
               ],
@@ -9609,6 +9611,23 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "disabled": true,
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"sss\"",
+                        "",
+                        ""
+                      ]
+                    }
+                  ]
                 }
               ],
               "parameters": [
@@ -9710,28 +9729,6 @@
                 }
               ],
               "objectGroups": []
-            },
-            {
-              "fullName": "",
-              "functionType": "Action",
-              "name": "onCreated",
-              "sentence": "",
-              "events": [
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
-                  "actions": []
-                }
-              ],
-              "parameters": [
-                {
-                  "description": "Object",
-                  "name": "Object",
-                  "supplementaryInformation": "pvz::Sunflower",
-                  "type": "object"
-                }
-              ],
-              "objectGroups": []
             }
           ],
           "eventsFunctionsFolderStructure": {
@@ -9742,9 +9739,6 @@
               },
               {
                 "functionName": "onSignal"
-              },
-              {
-                "functionName": "onCreated"
               },
               {
                 "functionName": "doStepPostEvents"
@@ -17789,7 +17783,19 @@
               "events": [
                 {
                   "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [],
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "CompareTimer"
+                      },
+                      "parameters": [
+                        "",
+                        "TimerName",
+                        ">=",
+                        "0.1"
+                      ]
+                    }
+                  ],
                   "actions": [
                     {
                       "type": {
@@ -17801,6 +17807,62 @@
                         "CursorX()",
                         "=",
                         "CursorY()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ResetTimer"
+                      },
+                      "parameters": [
+                        "",
+                        "TimerName"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": [
+                {
+                  "description": "Object",
+                  "name": "Object",
+                  "type": "object"
+                },
+                {
+                  "description": "Behavior",
+                  "name": "Behavior",
+                  "supplementaryInformation": "utils::FollowMouseCursor",
+                  "type": "behavior"
+                }
+              ],
+              "objectGroups": []
+            },
+            {
+              "fullName": "",
+              "functionType": "Action",
+              "name": "onPlacedInScene",
+              "sentence": "",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "DebuggerTools::ConsoleLog"
+                      },
+                      "parameters": [
+                        "\"bb t\"",
+                        "",
+                        ""
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ResetTimer"
+                      },
+                      "parameters": [
+                        "",
+                        "TimerName"
                       ]
                     }
                   ]
@@ -17826,6 +17888,9 @@
             "folderName": "__ROOT",
             "children": [
               {
+                "functionName": "onPlacedInScene"
+              },
+              {
                 "functionName": "doStepPreEvents"
               }
             ]
@@ -17833,7 +17898,14 @@
           "propertyDescriptors": [],
           "propertiesFolderStructure": {
             "folderName": "__ROOT"
-          }
+          },
+          "variables": [
+            {
+              "name": "TimerName",
+              "type": "string",
+              "value": "FollowCursor"
+            }
+          ]
         }
       ],
       "eventsBasedObjects": [
